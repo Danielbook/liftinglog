@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-// Import Style
-import styles from './App.css';
-
 // Import Components
 import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
@@ -12,10 +9,9 @@ import DevTools from './components/DevTools';
 
 // Import Actions
 import { toggleAddPost } from './AppActions';
-import { switchLanguage } from '../../modules/Intl/IntlActions';
+// import { switchLanguage } from '../../modules/Intl/IntlActions';
 
-import Layout from 'antd';
-const { Header, Content, Sider } = Layout;
+import { Button, Container, Header } from 'semantic-ui-react'
 
 export class App extends Component {
   constructor(props) {
@@ -37,8 +33,7 @@ export class App extends Component {
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="MERN Starter - Blog App"
-            titleTemplate="%s - Blog App"
+            title="Lifting Log"
             meta={[
               { charset: 'utf-8' },
               {
@@ -51,14 +46,16 @@ export class App extends Component {
               },
             ]}
           />
-          <Layout>
-            <Sider>Sider</Sider>
-            <Layout>
-              <Header>Header</Header>
-              <Content>Content</Content>
-              <Footer>Footer</Footer>
-            </Layout>
-          </Layout>
+          <Container>
+            <Header as='h1'>Hello world!</Header>
+
+            <Button
+              content='Discover docs'
+              href='http://react.semantic-ui.com'
+              icon='github'
+              labelPosition='left'
+            />
+          </Container>
           {/*<Header*/}
             {/*switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}*/}
             {/*intl={this.props.intl}*/}
