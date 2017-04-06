@@ -5,14 +5,7 @@
     "stage-0"
   ],
   "plugins": [
-    "react-hot-loader/babel",
-    [
-      "import",
-      {
-        libraryName: "antd",
-        style: "css"
-      }
-    ]
+    "react-hot-loader/babel"
   ],
   "env": {
     "production": {
