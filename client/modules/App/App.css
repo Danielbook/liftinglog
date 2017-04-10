@@ -4,3 +4,31 @@
   padding: 15px;
   margin: 0 auto;
 }
+
+.appBar {
+  -moz-transition: left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  left: 0;
+  width: auto !important;
+  right: 0 !important;
+  position: fixed !important;
+}
+
+.appContent {
+  -moz-transition: padding-left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: padding-left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: padding-left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: padding-left 218ms cubic-bezier(0.4, 0, 0.2, 1);
+  padding-right: 20px !important;
+  padding-top: 64px !important;
+}
+
+.appBar.expanded {
+  left: 255px;
+}
+
+.appContent.expanded {
+  padding-left: 255px;
+}
