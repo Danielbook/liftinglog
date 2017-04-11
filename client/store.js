@@ -3,13 +3,14 @@
  */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import DevTools from './modules/App/components/DevTools';
 import rootReducer from './reducers';
 
 export function configureStore(initialState = {}) {
   // Middleware and store enhancers
   const enhancers = [
-    applyMiddleware(thunk),
+    applyMiddleware(logger, thunk),
   ];
 
   if (process.env.CLIENT && process.env.NODE_ENV === 'development') {

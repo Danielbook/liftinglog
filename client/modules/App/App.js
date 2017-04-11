@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import {toggleAddPost} from "./AppActions";
+import {toggleAddPost, toggleSidebar} from "./AppActions";
+import {getsidebarOpen} from "./AppReducer";
 import RaisedButton from "material-ui/RaisedButton";
 
 import injectTapEventPlugin from "react-tap-event-plugin";
@@ -14,23 +15,13 @@ import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
 import Toggle from "material-ui/Toggle";
-import List from "material-ui/List";
-import ListItem from "material-ui/List/ListItem";
-import Subheader from "material-ui/Subheader";
-import Drawer from "material-ui/Drawer";
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-import ContentSend from "material-ui/svg-icons/content/send";
-import ContentDrafts from "material-ui/svg-icons/content/drafts";
-import ContentInbox from "material-ui/svg-icons/content/inbox";
-import ActionGrade from "material-ui/svg-icons/action/grade";
 
+import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
+
+//Styles
 import styles from "./App.css";
 import classnames from "classnames/bind";
-// import Header from './components/Header/Header';
-// import Footer from './components/Footer/Footer';
-
-// require("./App.css");
-
+import Sidebar from "./components/Sidebar/Sidebar";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';
@@ -70,13 +61,12 @@ export class App extends Component {
   constructor(props) {
     super(props);
     //this.handleTouchTap = this.handleTouchTap.bind(this);
+    console.log(this.props);
     this.state = {
       isMounted: false,
-      open:      true,
       logged:    true
     };
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   componentDidMount() {
@@ -87,17 +77,13 @@ export class App extends Component {
     this.props.dispatch(toggleAddPost());
   };
 
-
   handleChange = (event, logged) => {
     this.setState({logged: logged});
   };
 
   handleToggle() {
-    this.setState({open: !this.state.open});
-  }
-
-  handleClose() {
-    this.setState({open: true});
+    // this.setState({open: !this.state.open});
+    this.props.dispatch(toggleSidebar());
   }
 
   logging = () => console.log(this.state);
@@ -105,11 +91,11 @@ export class App extends Component {
   render() {
     let appBarStyle = cx({
       appBar:   true,
-      expanded: this.state.open
+      expanded: this.props.sidebar
     });
     let appContentStyle = cx({
       appContent: true,
-      expanded:   this.state.open
+      expanded:   this.props.sidebar
     });
     return (
       <MuiThemeProvider>
@@ -135,53 +121,11 @@ export class App extends Component {
             title="Lifting Log"
             iconElementRight={this.state.logged ? <Logged /> : <Login />}
           />
-          <Drawer
-            docked={true}
-            open={this.state.open}
-            onRequestChange={(open) => this.setState({open})}
-          >
-            <List>
-              <Subheader>Nested List Items</Subheader>
-              <ListItem primaryText="Sent mail" leftIcon={<ContentSend />}/>
-              <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />}/>
-              <ListItem
-                primaryText="Inbox"
-                leftIcon={<ContentInbox />}
-                initiallyOpen={true}
-                primaryTogglesNestedList={true}
-                nestedItems={[
-                  <ListItem
-                    key={1}
-                    primaryText="Starred"
-                    leftIcon={<ActionGrade />}
-                  />,
-                  <ListItem
-                    key={2}
-                    primaryText="Sent Mail"
-                    leftIcon={<ContentSend />}
-                    disabled={true}
-                    nestedItems={[
-                      <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />}/>,
-                    ]}
-                  />,
-                  <ListItem
-                    key={3}
-                    primaryText="Inbox"
-                    leftIcon={<ContentInbox />}
-                    open={this.state.open}
-                    onNestedListToggle={this.handleNestedListToggle}
-                    nestedItems={[
-                      <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />}/>,
-                    ]}
-                  />,
-                ]}
-              />
-            </List>
 
-          </Drawer>
+          <Sidebar />
+
           <div className={appContentStyle}>
             { this.props.children }
-
             <Toggle
               label="Logged"
               defaultToggled={true}
@@ -207,13 +151,13 @@ export class App extends Component {
 App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  intl:     PropTypes.object.isRequired,
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    sidebar: getsidebarOpen(store),
   };
 }
 
