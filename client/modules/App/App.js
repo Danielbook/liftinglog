@@ -6,29 +6,28 @@ import DevTools from "./components/DevTools";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {toggleAddPost, toggleSidebar} from "./AppActions";
 import {getsidebarOpen} from "./AppReducer";
-import RaisedButton from "material-ui/RaisedButton";
 
-import injectTapEventPlugin from "react-tap-event-plugin";
+// Material UI Components
+import RaisedButton from "material-ui/RaisedButton";
+import './components/tap_events';
 import AppBar from "material-ui/AppBar";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
 import Toggle from "material-ui/Toggle";
+import DatePicker from 'material-ui/DatePicker';
 
-import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
+// Material UI Icons
+import NavigationMoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 
-//Styles
+// Styles
 import styles from "./App.css";
 import classnames from "classnames/bind";
 import Sidebar from "./components/Sidebar/Sidebar";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 class Login extends Component {
   static muiName = 'FlatButton';
@@ -44,7 +43,7 @@ const Logged = (props) => (
   <IconMenu
     {...props}
     iconButtonElement={
-      <IconButton><MoreVertIcon /></IconButton>
+      <IconButton><NavigationMoreVertIcon/></IconButton>
     }
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -61,7 +60,6 @@ export class App extends Component {
   constructor(props) {
     super(props);
     //this.handleTouchTap = this.handleTouchTap.bind(this);
-    console.log(this.props);
     this.state = {
       isMounted: false,
       logged:    true
@@ -126,6 +124,9 @@ export class App extends Component {
 
           <div className={appContentStyle}>
             { this.props.children }
+
+            <DatePicker hintText="Calendar" container="inline" mode="landscape" />
+
             <Toggle
               label="Logged"
               defaultToggled={true}
@@ -156,7 +157,7 @@ App.propTypes = {
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
-    intl: store.intl,
+    intl:    store.intl,
     sidebar: getsidebarOpen(store),
   };
 }

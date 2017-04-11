@@ -10,7 +10,9 @@ import rootReducer from './reducers';
 export function configureStore(initialState = {}) {
   // Middleware and store enhancers
   const enhancers = [
-    applyMiddleware(logger, thunk),
+    applyMiddleware(
+      // logger, Use redux tool in browser instead
+      thunk),
   ];
 
   if (process.env.CLIENT && process.env.NODE_ENV === 'development') {

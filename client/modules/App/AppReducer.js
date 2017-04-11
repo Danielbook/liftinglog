@@ -5,7 +5,7 @@ import { TOGGLE_SIDEBAR } from './AppActions';
 // Initial State
 const initialState = {
   showAddPost: false,
-  sidebarOpen: true,
+  sidebarOpen: false,
 };
 
 const AppReducer = (state = initialState, action) => {

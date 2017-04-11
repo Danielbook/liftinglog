@@ -1,20 +1,24 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
+import { Link } from 'react-router';
 import {getsidebarOpen} from "../../AppReducer";
 
+// Material UI Components
 import Drawer from "material-ui/Drawer";
 import List from "material-ui/List";
 import ListItem from "material-ui/List/ListItem";
 import Subheader from "material-ui/Subheader";
+import Avatar from "material-ui/Avatar";
+
+// Material UI Icons
 import ContentSend from "material-ui/svg-icons/content/send";
 import ContentDrafts from "material-ui/svg-icons/content/drafts";
 import ContentInbox from "material-ui/svg-icons/content/inbox";
 import ActionGrade from "material-ui/svg-icons/action/grade";
 import ActionHome from "material-ui/svg-icons/action/home";
 import ActionToday from "material-ui/svg-icons/action/today";
+import ActionTrendingup from "material-ui/svg-icons/action/trending-up";
 import ActionSettings from "material-ui/svg-icons/action/settings";
-import { Link } from 'react-router';
-
 
 class Sidebar extends Component {
   constructor(props) {
@@ -30,8 +34,14 @@ class Sidebar extends Component {
       >
         <List>
           <Subheader>Navigation</Subheader>
+          <ListItem
+            disabled={true}
+            leftAvatar={<Avatar>D</Avatar>}
+          >
+          </ListItem>
+
           <ListItem containerElement={<Link to="/" />} primaryText="Home" leftIcon={<ActionHome />}/>
-          <ListItem containerElement={<Link to="/calendar" />} primaryText="Calendar" leftIcon={<ActionToday />}/>
+          <ListItem containerElement={<Link to="/stats" />} primaryText="Stats" leftIcon={<ActionTrendingup />}/>
           <ListItem containerElement={<Link to="/settings" />}primaryText="Settings" leftIcon={<ActionSettings />}/>
 
           {/*<ListItem primaryText="Sent mail" leftIcon={<ContentSend />}/>*/}
