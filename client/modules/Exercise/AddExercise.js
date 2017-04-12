@@ -5,11 +5,21 @@ import React from "react";
 import {connect} from "react-redux";
 import {addExercise} from "./ExerciseActions";
 
+import AutoComplete from 'material-ui/AutoComplete';
+
+
 let AddExercise = ({dispatch}) => {
   let input;
 
   return (
     <div>
+
+      {/*<AutoComplete*/}
+        {/*hintText="Exercise"*/}
+        {/*dataSource={this.state.dataSource}*/}
+        {/*onUpdateInput={this.handleUpdateInput}*/}
+      {/*/>*/}
+
       <form onSubmit={e => {
         e.preventDefault();
         if (!input.value.trim()) {

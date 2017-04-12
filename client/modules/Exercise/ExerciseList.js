@@ -3,9 +3,26 @@
  */
 import React, { PropTypes } from 'react'
 import Exercise from './Exercise'
+import {List, makeSelectable} from 'material-ui/List'
+
+import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
+  from 'material-ui/Table';
+
+let SelectableList = makeSelectable(List);
+
+const styles = {
+  propContainer: {
+    width: 200,
+    overflow: 'hidden',
+    margin: '20px auto 0',
+  },
+  propToggleHeader: {
+    margin: '20px auto 10px',
+  },
+};
 
 const ExerciseList = ({ exercises, onExerciseClick }) => (
-  <ul>
+  <SelectableList>
     {exercises.map(exercise =>
       <Exercise
         key={exercise.id}
@@ -13,7 +30,7 @@ const ExerciseList = ({ exercises, onExerciseClick }) => (
         onClick={() => onExerciseClick(exercise.id)}
       />
     )}
-  </ul>
+  </SelectableList>
 );
 
 ExerciseList.propTypes = {
