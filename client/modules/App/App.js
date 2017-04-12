@@ -6,21 +6,17 @@ import DevTools from "./components/DevTools";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {toggleAddPost, toggleSidebar} from "./AppActions";
 import {getsidebarOpen} from "./AppReducer";
-
 // Material UI Components
 import RaisedButton from "material-ui/RaisedButton";
-import './components/tap_events';
+import "./components/tap_events";
 import AppBar from "material-ui/AppBar";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
 import Toggle from "material-ui/Toggle";
-import DatePicker from 'material-ui/DatePicker';
-
 // Material UI Icons
 import NavigationMoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-
 // Styles
 import styles from "./App.css";
 import classnames from "classnames/bind";
@@ -28,33 +24,6 @@ import Sidebar from "./components/Sidebar/Sidebar";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';
-
-class Login extends Component {
-  static muiName = 'FlatButton';
-
-  render() {
-    return (
-      <FlatButton {...this.props} label="Login"/>
-    );
-  }
-}
-
-const Logged = (props) => (
-  <IconMenu
-    {...props}
-    iconButtonElement={
-      <IconButton><NavigationMoreVertIcon/></IconButton>
-    }
-    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-  >
-    <MenuItem primaryText="Refresh"/>
-    <MenuItem primaryText="Help"/>
-    <MenuItem primaryText="Sign out"/>
-  </IconMenu>
-);
-
-Logged.muiName = 'IconMenu';
 
 export class App extends Component {
   constructor(props) {
@@ -75,8 +44,9 @@ export class App extends Component {
     this.props.dispatch(toggleAddPost());
   };
 
-  handleChange = (event, logged) => {
-    this.setState({logged: logged});
+  handleChange = () => {
+    let toggle = !this.state.logged;
+    this.setState({logged: toggle});
   };
 
   handleToggle() {
@@ -95,6 +65,22 @@ export class App extends Component {
       appContent: true,
       expanded:   this.props.sidebar
     });
+    const Logged = (props) => (
+      <IconMenu
+        {...props}
+        iconButtonElement={
+          <IconButton><NavigationMoreVertIcon/></IconButton>
+        }
+        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+      >
+        <MenuItem primaryText="Refresh"/>
+        <MenuItem primaryText="Help"/>
+        <MenuItem onTouchTap={this.handleChange} primaryText="Sign out"/>
+      </IconMenu>
+    );
+
+    Logged.muiName = 'IconMenu';
     return (
       <MuiThemeProvider>
         <div>
@@ -117,7 +103,7 @@ export class App extends Component {
             className={appBarStyle}
             onLeftIconButtonTouchTap={this.handleToggle}
             title="Lifting Log"
-            iconElementRight={this.state.logged ? <Logged /> : <Login />}
+            iconElementRight={this.state.logged ? <Logged /> : <FlatButton onTouchTap={this.handleChange} label="Login"/>}
           />
 
           <Sidebar />
@@ -125,19 +111,6 @@ export class App extends Component {
           <div className={appContentStyle}>
             { this.props.children }
 
-            <DatePicker hintText="Calendar" container="inline" mode="landscape" />
-
-            <Toggle
-              label="Logged"
-              defaultToggled={true}
-              onToggle={this.handleChange}
-              labelPosition="right"
-              style={{margin: 20}}
-            />
-            <RaisedButton
-              label="Toggle Drawer"
-              onTouchTap={this.handleToggle}
-            />
             <RaisedButton
               label="Log state"
               onTouchTap={this.logging}

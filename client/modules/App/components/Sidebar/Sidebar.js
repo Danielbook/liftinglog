@@ -42,7 +42,7 @@ class Sidebar extends Component {
 
           <ListItem containerElement={<Link to="/" />} primaryText="Home" leftIcon={<ActionHome />}/>
           <ListItem containerElement={<Link to="/stats" />} primaryText="Stats" leftIcon={<ActionTrendingup />}/>
-          <ListItem containerElement={<Link to="/settings" />}primaryText="Settings" leftIcon={<ActionSettings />}/>
+          <ListItem containerElement={<Link to="/settings" />} primaryText="Settings" leftIcon={<ActionSettings />}/>
 
           {/*<ListItem primaryText="Sent mail" leftIcon={<ContentSend />}/>*/}
           {/*<ListItem primaryText="Drafts" leftIcon={<ContentDrafts />}/>*/}

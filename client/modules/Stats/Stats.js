@@ -1,10 +1,10 @@
 import React from 'react';
 
-class Calendar extends React.Component {
+class Stats extends React.Component {
   render() {
     return (
       <h1>Stats</h1>
     );
   }
 }
-export default Calendar
+export default Stats

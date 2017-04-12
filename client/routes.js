@@ -3,6 +3,8 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
 import Stats from './modules/Stats/Stats';
+import Workout from './modules/Workout/Workout';
+import Settings from './modules/Settings/Settings';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -28,7 +30,8 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);
+          {/*cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);*/}
+          cb(null, require('./modules/Home/Home').default);
         });
       }}
     />
@@ -43,6 +46,14 @@ export default (
     <Route
       path="/stats"
       component={Stats}
+    />
+    <Route
+      path="/settings"
+      component={Settings}
+    />
+    <Route
+      path="/workout"
+      component={Workout}
     />
   </Route>
 );
