@@ -5,6 +5,8 @@ import App from './modules/App/App';
 import Stats from './modules/Stats/Stats';
 import Workout from './modules/Workout/Workout';
 import Settings from './modules/Settings/Settings';
+import LoginPage from './modules/Login/LoginPage';
+import SignUpPage from './modules/SignUp/SignUpPage';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -55,5 +57,14 @@ export default (
       path="/workout"
       component={Workout}
     />
+    <Route
+      path="/login"
+      component={LoginPage}
+    />
+    <Route
+      path="/signup"
+      component={SignUpPage}
+    />
+
   </Route>
 );

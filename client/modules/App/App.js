@@ -19,7 +19,8 @@ import NavigationMoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 // Styles
 import styles from "./App.css";
 import classnames from "classnames/bind";
-import Sidebar from "./components/Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
+import {Link} from "react-router";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';
@@ -73,9 +74,8 @@ export class App extends Component {
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
-        <MenuItem primaryText="Refresh"/>
-        <MenuItem primaryText="Help"/>
-        <MenuItem onTouchTap={this.handleChange} primaryText="Sign out"/>
+        <MenuItem primaryText="Login" containerElement={<Link to="/login" />}/>
+        <MenuItem primaryText="Sign up" containerElement={<Link to="/signup" />}/>
       </IconMenu>
     );
 
@@ -102,7 +102,7 @@ export class App extends Component {
             className={appBarStyle}
             onLeftIconButtonTouchTap={this.handleToggle}
             title="Lifting Log"
-            iconElementRight={this.state.logged ? <Logged /> : <FlatButton onTouchTap={this.handleChange} label="Login"/>}
+            iconElementRight={this.state.logged ? <FlatButton onTouchTap={this.handleChange} label="Logout"/> : <Logged />}
           />
 
           <Sidebar />

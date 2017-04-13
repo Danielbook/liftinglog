@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 import { Link } from 'react-router';
-import {getsidebarOpen} from "../../AppReducer";
+import {getsidebarOpen} from "../App/AppReducer";
 
 // Material UI Components
 import Drawer from "material-ui/Drawer";
