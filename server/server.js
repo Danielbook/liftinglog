@@ -22,16 +22,17 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import serverConfig from './config_old';
+require('dotenv').config();
 
 // Auth
 const passport = require('passport');
-const authConfig = require('./config/index.json');
+import authConfig from './config';
 
 mongoose.Promise = global.Promise;
 
 // connect to the database and load models
 require('./models').connect(authConfig.dbUri);
+// require('./models').connect(authConfig.dbUri_remote); // TODO Fix remote access to server
 
 // Initialize the Express App
 const app = new Express();

@@ -1,5 +1,0 @@
-{
-  "dbUri": "mongodb://localhost/mern-starter",
-  "jwtSecret": "a secret phrase!!",
-  "port": 8000
-}

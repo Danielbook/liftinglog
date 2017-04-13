@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {toggleAddPost, toggleSidebar} from "./AppActions";
 import {getsidebarOpen} from "./AppReducer";
 // Material UI Components
@@ -69,7 +70,7 @@ export class App extends Component {
 
     Logged.muiName = 'IconMenu';
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={getMuiTheme({userAgent: (typeof navigator !== 'undefined' && navigator.userAgent) || 'all' })}>
         <div>
           {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
           <Helmet

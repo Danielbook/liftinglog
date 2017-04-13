@@ -3,7 +3,7 @@
  */
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
-const config = require('../config/index.json');
+import config from '../config';
 
 
 /**
