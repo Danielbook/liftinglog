@@ -7,6 +7,7 @@ import {browserHistory, Router} from "react-router";
 import IntlWrapper from "./modules/Intl/IntlWrapper";
 // Import Routes
 import routes from "./routes";
+// import routes from "./routes_new";
 
 // Base stylesheet
 require('./main.css');

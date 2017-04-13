@@ -3,10 +3,12 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
 import Stats from './modules/Stats/Stats';
+import Home from './modules/Home/Home';
 import Workout from './modules/Workout/Workout';
 import Settings from './modules/Settings/Settings';
 import LoginPage from './modules/Login/LoginPage';
 import SignUpPage from './modules/SignUp/SignUpPage';
+import Auth from './modules/Auth/Auth';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -25,37 +27,43 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
 }
 
+function requireAuth(nextState, replace) {
+  if (!Auth.isUserAuthenticated()) {
+    replace({
+      pathname: '/'
+    })
+  }
+}
+
+
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
   <Route path="/" component={App}>
     <IndexRoute
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          {/*cb(null, require('./modules/Post/pages/PostListPage/PostListPage').default);*/}
-          cb(null, require('./modules/Home/Home').default);
-        });
+      getComponent={(nextState, callback) => {
+          if (Auth.isUserAuthenticated()) {
+            callback(null, require('./modules/Dashboard/DashboardPage').default);
+          } else {
+            callback(null, Home);
+        }
       }}
-    />
-    <Route
-      path="/posts/:slug-:cuid"
-      getComponent={(nextState, cb) => {
-        require.ensure([], require => {
-          cb(null, require('./modules/Post/pages/PostDetailPage/PostDetailPage').default);
-        });
-      }}
+
     />
     <Route
       path="/stats"
       component={Stats}
+      onEnter={requireAuth}
     />
     <Route
       path="/settings"
       component={Settings}
+      onEnter={requireAuth}
     />
     <Route
       path="/workout"
       component={Workout}
+      onEnter={requireAuth}
     />
     <Route
       path="/login"
@@ -65,6 +73,16 @@ export default (
       path="/signup"
       component={SignUpPage}
     />
+    <Route
+      path='/logout'
+      onEnter={(nextState, replace) => {
+        Auth.deauthenticateUser();
+
+        // change the current URL to /
+        replace('/');
+      }}
+    />
+
 
   </Route>
 );

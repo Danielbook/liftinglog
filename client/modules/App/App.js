@@ -21,6 +21,7 @@ import styles from "./App.css";
 import classnames from "classnames/bind";
 import Sidebar from "../Sidebar/Sidebar";
 import {Link} from "react-router";
+import Auth from "../Auth/Auth";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';
@@ -31,7 +32,6 @@ export class App extends Component {
     //this.handleTouchTap = this.handleTouchTap.bind(this);
     this.state = {
       isMounted: false,
-      logged:    true
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
@@ -40,21 +40,9 @@ export class App extends Component {
     this.setState({isMounted: true}); // eslint-disable-line
   }
 
-  toggleAddPostSection = () => {
-    this.props.dispatch(toggleAddPost());
-  };
-
-  handleChange = () => {
-    let toggle = !this.state.logged;
-    this.setState({logged: toggle});
-  };
-
   handleToggle() {
-    // this.setState({open: !this.state.open});
     this.props.dispatch(toggleSidebar());
   }
-
-  logging = () => console.log(this.state);
 
   render() {
     let appBarStyle = cx({
@@ -102,18 +90,13 @@ export class App extends Component {
             className={appBarStyle}
             onLeftIconButtonTouchTap={this.handleToggle}
             title="Lifting Log"
-            iconElementRight={this.state.logged ? <FlatButton onTouchTap={this.handleChange} label="Logout"/> : <Logged />}
+            iconElementRight={Auth.isUserAuthenticated() ? <FlatButton label="Logout" containerElement={<Link to="/logout"/>} /> : <Logged />}
           />
 
           <Sidebar />
 
           <div className={appContentStyle}>
             { this.props.children }
-
-            <RaisedButton
-              label="Log state"
-              onTouchTap={this.logging}
-            />
           </div>
         </div>
       </MuiThemeProvider>

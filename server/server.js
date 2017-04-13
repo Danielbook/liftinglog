@@ -11,16 +11,6 @@ import config from '../webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
-// Initialize the Express App
-const app = new Express();
-
-// Run Webpack dev server in development mode
-if (process.env.NODE_ENV === 'development') {
-  const compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-  app.use(webpackHotMiddleware(compiler));
-}
-
 // React And Redux Setup
 import { configureStore } from '../client/store';
 import { Provider } from 'react-redux';
@@ -32,34 +22,51 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
-import posts from './routes/post.routes';
-import dummyData from './dummyData';
-import serverConfig from './config';
+import serverConfig from './config_old';
 
 // Auth
-const auth = require('./routes/auth.routes');
+const passport = require('passport');
+const authConfig = require('./config/index.json');
 
-// Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
 
-// MongoDB Connection
-mongoose.connect(serverConfig.mongoURL, (error) => {
-  if (error) {
-    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
-    throw error;
-  }
+// connect to the database and load models
+require('./models').connect(authConfig.dbUri);
 
-  // feed some dummy data in DB.
-  dummyData();
-});
+// Initialize the Express App
+const app = new Express();
+
+// Run Webpack dev server in development mode
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(config);
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
+app.use(passport.initialize());
 // app.use('/api', posts);
-app.use('/auth', auth);
+
+// Load passport strategies
+const localSignupStrategy = require('./passport/local-signup');
+const localLoginStrategy = require('./passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+
+// routes
+const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
+
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -145,9 +152,9 @@ app.use((req, res, next) => {
 });
 
 // start app
-app.listen(serverConfig.port, (error) => {
+app.listen(authConfig.port, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${serverConfig.port}`); // eslint-disable-line
+    console.log(`MERN is running on port: ${authConfig.port}`); // eslint-disable-line
   }
 });
 

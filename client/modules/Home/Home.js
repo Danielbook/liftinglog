@@ -16,15 +16,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h1>
-        New Workout
-        <FloatingActionButton
-          containerElement={<Link to="/workout"/>}
-          style={{marginLeft: 20}}
-        >
-          <ContentAdd />
-        </FloatingActionButton>
-      </h1>
+        <h1>Welcome, please login or sign up!</h1>
       </div>
     );
   }
