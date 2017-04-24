@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 import {Link} from "react-router";
 // Material UI Icons
@@ -14,17 +15,16 @@ const Dashboard = ({ secretData }) => (
     />
 
     {secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{secretData}</CardText>}
-
+      <h1>
+        New Workout
+        <FloatingActionButton
+          containerElement={<Link to="/workout"/>}
+          style={{marginLeft: 20}}
+        >
+          <ContentAdd />
+        </FloatingActionButton>
+      </h1>
   </Card>
-    <h1>
-      New Workout
-      <FloatingActionButton
-        containerElement={<Link to="/workout"/>}
-        style={{marginLeft: 20}}
-      >
-        <ContentAdd />
-      </FloatingActionButton>
-    </h1>
   </div>
 );
 

@@ -4,36 +4,29 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addExercise} from "./ExerciseActions";
-
-import AutoComplete from 'material-ui/AutoComplete';
-
+import RaisedButton from "material-ui/RaisedButton";
+import TextField from "material-ui/TextField";
 
 let AddExercise = ({dispatch}) => {
   let input;
 
   return (
     <div>
-
-      {/*<AutoComplete*/}
-        {/*hintText="Exercise"*/}
-        {/*dataSource={this.state.dataSource}*/}
-        {/*onUpdateInput={this.handleUpdateInput}*/}
-      {/*/>*/}
-
       <form onSubmit={e => {
         e.preventDefault();
-        if (!input.value.trim()) {
+        if (!input.input.value.trim()) {
           return
         }
-        dispatch(addExercise(input.value));
-        input.value = ''
+        dispatch(addExercise(input.input.value, 0));
+        input.input.value = ''
       }}>
-        <input ref={node => {
-          input = node
-        }}/>
-        <button type="submit">
-          Add Exercise
-        </button>
+        <TextField
+          hintText="Exercise"
+          floatingLabelText="Exercise Name"
+          ref={node => {
+            input = node
+          }}/>
+        <RaisedButton label="Add Exercise" primary={true} type="submit"/>
       </form>
     </div>
   )

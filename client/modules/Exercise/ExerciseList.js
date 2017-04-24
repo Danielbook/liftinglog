@@ -1,12 +1,10 @@
 /**
  * Created by Daniel on 2017-04-11.
  */
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from "prop-types";
 import Exercise from './Exercise'
 import {List, makeSelectable} from 'material-ui/List'
-
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
-  from 'material-ui/Table';
 
 let SelectableList = makeSelectable(List);
 

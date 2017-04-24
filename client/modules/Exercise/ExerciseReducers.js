@@ -7,6 +7,7 @@ const exercise = (state = {}, action) => {
       return {
         id:        action.id,
         text:      action.text,
+        numberOfSets: action.numberOfSets,
         completed: false
       };
     case 'TOGGLE_EXERCISE':
