@@ -22,9 +22,9 @@ import NavigationMoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 // Styles
 import styles from "./App.css";
 import classnames from "classnames/bind";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import {Link} from "react-router";
-import Auth from "../Auth/Auth";
+import Auth from "../../components/Auth/Auth";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';

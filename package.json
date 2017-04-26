@@ -57,7 +57,7 @@
     "redux-thunk": "^2.1.0",
     "sanitize-html": "^1.11.4",
     "validator": "^7.0.0",
-    "prop-types": "latest"
+    "prop-types": "^15.5.7"
   },
   "devDependencies": {
     "ava": "^0.15.2",

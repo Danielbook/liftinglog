@@ -3,12 +3,12 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './modules/App/App';
 import Stats from './modules/Stats/Stats';
-import Home from './modules/Home/Home';
+import Home from './components/Home/Home';
 import Workout from './modules/Workout/Workout';
-import Settings from './modules/Settings/Settings';
-import LoginPage from './modules/Login/LoginPage';
-import SignUpPage from './modules/SignUp/SignUpPage';
-import Auth from './modules/Auth/Auth';
+import Settings from './components/Settings/Settings';
+import LoginPage from './components/Login/LoginPage';
+import SignUpPage from './components/SignUp/SignUpPage';
+import Auth from './components/Auth/Auth';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -25,6 +25,8 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/Post/pages/PostListPage/PostListPage');
   require('./modules/Post/pages/PostDetailPage/PostDetailPage');
+  require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage');
+  require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage');
 }
 
 function requireAuth(nextState, replace) {
@@ -42,7 +44,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, callback) => {
           if (Auth.isUserAuthenticated()) {
-            callback(null, require('./modules/Dashboard/DashboardPage').default);
+            callback(null, require('./components/Dashboard/DashboardPage').default);
           } else {
             callback(null, Home);
         }
@@ -62,6 +64,22 @@ export default (
       path="/workout"
       component={Workout}
       onEnter={requireAuth}
+    />
+    <Route
+      path="/workouts"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage').default);
+        });
+      }}
+    />
+    <Route
+      path="/workouts/:slug-:cuid"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage').default);
+        });
+      }}
     />
     <Route
       path="/login"

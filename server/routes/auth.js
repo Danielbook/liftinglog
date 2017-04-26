@@ -1,6 +1,3 @@
-/**
- * Created by Daniel on 2017-04-13.
- */
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');

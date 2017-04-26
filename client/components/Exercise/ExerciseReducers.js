@@ -10,15 +10,6 @@ const exercise = (state = {}, action) => {
         numberOfSets: action.numberOfSets,
         completed: false
       };
-    case 'TOGGLE_EXERCISE':
-      if (state.id !== action.id) {
-        return state
-      }
-
-      return Object.assign({}, state, {
-        completed: !state.completed
-      });
-
     default:
       return state
   }
@@ -31,10 +22,6 @@ const exercises = (state = [], action) => {
         ...state,
         exercise(undefined, action)
       ];
-    case 'TOGGLE_EXERCISE':
-      return state.map(t =>
-        exercise(t, action)
-      );
     default:
       return state
   }

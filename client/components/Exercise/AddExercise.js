@@ -4,7 +4,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addExercise} from "./ExerciseActions";
-import RaisedButton from "material-ui/RaisedButton";
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from "material-ui/TextField";
 
 let AddExercise = ({dispatch}) => {
@@ -26,7 +27,9 @@ let AddExercise = ({dispatch}) => {
           ref={node => {
             input = node
           }}/>
-        <RaisedButton label="Add Exercise" primary={true} type="submit"/>
+        <FloatingActionButton mini={true} type="submit">
+          <ContentAdd/>
+        </FloatingActionButton>
       </form>
     </div>
   )

@@ -3,9 +3,11 @@ import React, {Component} from "react";
 import DatePicker from "material-ui/DatePicker";
 import Divider from "material-ui/Divider";
 import TextField from "material-ui/TextField";
-
-import AddExercise from "../Exercise/AddExercise";
-import ExerciseListVisible from "../Exercise/ExerciseListVisible";
+import RaisedButton from 'material-ui/RaisedButton';
+import NavigationChevronLeft from "material-ui/svg-icons/navigation/chevron-left";
+import AddExercise from "../../components/Exercise/AddExercise";
+import ExerciseList from "../../components/Exercise/ExerciseList";
+import {browserHistory} from "react-router";
 
 class Workout extends Component {
   constructor(props) {
@@ -15,6 +17,13 @@ class Workout extends Component {
   render() {
     return (
       <div>
+        <div>
+          <RaisedButton
+            onTouchTap={browserHistory.goBack}
+            style={{marginTop: 20}}
+            icon={<NavigationChevronLeft />}
+          />
+        </div>
         <TextField
           hintText=""
           floatingLabelText="Name of workout"/>
@@ -25,7 +34,7 @@ class Workout extends Component {
 
         <Divider />
 
-        <ExerciseListVisible />
+        <ExerciseList />
 
       </div>
     );

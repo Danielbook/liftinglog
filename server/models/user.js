@@ -1,10 +1,7 @@
-/**
- * Created by Daniel on 2017-04-13.
- */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// define the User model schema
+// Define the User model schema
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,

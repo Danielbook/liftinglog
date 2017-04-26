@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { Link } from 'react-router';
-import {getsidebarOpen} from "../App/AppReducer";
+import {getsidebarOpen} from "../../modules/App/AppReducer";
 
 // Material UI Components
 import Drawer from "material-ui/Drawer";
@@ -42,6 +42,7 @@ class Sidebar extends Component {
           </ListItem>
 
           <ListItem containerElement={<Link to="/" />} primaryText="Home" leftIcon={<ActionHome />}/>
+          <ListItem containerElement={<Link to="/workouts" />} primaryText="Workout" leftIcon={<ActionToday />}/>
           <ListItem containerElement={<Link to="/stats" />} primaryText="Stats" leftIcon={<ActionTrendingup />}/>
           <ListItem containerElement={<Link to="/settings" />} primaryText="Settings" leftIcon={<ActionSettings />}/>
 

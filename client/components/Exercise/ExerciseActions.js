@@ -7,10 +7,3 @@ export const addExercise = (text, numberOfSets) => {
     text
   }
 };
-
-export const toggleExercise = (id) => {
-  return {
-    type: 'TOGGLE_EXERCISE',
-    id
-  }
-};

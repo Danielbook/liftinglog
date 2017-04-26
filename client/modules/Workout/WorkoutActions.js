@@ -1,23 +1,58 @@
-let nextWorkoutId = 0;
-export const addWorkout = (name, date) => {
-  return {
-    type: 'ADD_WORKOUT',
-    id:   nextWorkoutId++,
-    name: name,
-    date: date
-  }
-};
+import callApi from '../../util/apiCaller';
 
-export const goToWorkout = (id) => {
-  return {
-    type: 'GOTO_WORKOUT',
-    id
-  }
-};
+// Export Constants
+export const ADD_WORKOUT = 'ADD_WORKOUT';
+export const ADD_WORKOUTS = 'ADD_WORKOUTS';
+export const DELETE_WORKOUT = 'DELETE_WORKOUT';
 
-export const removeWorkout = (id) => {
+// Export Actions
+export function addWorkout(workout) {
   return {
-    type: 'REMOVE_WORKOUT',
-    id
-  }
-};
+    type: ADD_WORKOUT,
+    workout,
+  };
+}
+
+export function addWorkoutRequest(workout) {
+  return (dispatch) => {
+    return callApi('workouts', 'workout', {
+      workout: {
+        name: workout.name,
+      },
+    }).then(res => dispatch(addWorkout(res.workout)));
+  };
+}
+
+export function addWorkouts(workouts) {
+  return {
+    type: ADD_WORKOUTS,
+    workouts,
+  };
+}
+
+export function fetchWorkouts() {
+  return (dispatch) => {
+    return callApi('workouts').then(res => {
+      dispatch(addWorkouts(res.workouts));
+    });
+  };
+}
+
+export function fetchWorkout(cuid) {
+  return (dispatch) => {
+    return callApi(`workouts/${cuid}`).then(res => dispatch(addWorkout(res.workout)));
+  };
+}
+
+export function deleteWorkout(cuid) {
+  return {
+    type: DELETE_WORKOUT,
+    cuid,
+  };
+}
+
+export function deleteWorkoutRequest(cuid) {
+  return (dispatch) => {
+    return callApi(`workouts/${cuid}`, 'delete').then(() => dispatch(deleteWorkout(cuid)));
+  };
+}
