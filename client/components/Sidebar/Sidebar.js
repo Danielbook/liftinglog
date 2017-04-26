@@ -37,12 +37,11 @@ class Sidebar extends Component {
           <Subheader>Navigation</Subheader>
           <ListItem
             disabled={true}
-            leftAvatar={<Avatar>D</Avatar>}
           >
+            <Avatar>D</Avatar>
           </ListItem>
-
           <ListItem containerElement={<Link to="/" />} primaryText="Home" leftIcon={<ActionHome />}/>
-          <ListItem containerElement={<Link to="/workouts" />} primaryText="Workout" leftIcon={<ActionToday />}/>
+          <ListItem containerElement={<Link to="/workouts" />} primaryText="Workouts" leftIcon={<ActionToday />}/>
           <ListItem containerElement={<Link to="/stats" />} primaryText="Stats" leftIcon={<ActionTrendingup />}/>
           <ListItem containerElement={<Link to="/settings" />} primaryText="Settings" leftIcon={<ActionSettings />}/>
 
@@ -80,7 +79,6 @@ class Sidebar extends Component {
               {/*/>,*/}
             {/*]}*/}
           {/*/>*/}
-
         </List>
       </Drawer>
     );

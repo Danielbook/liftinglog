@@ -1,16 +1,8 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-// Import Components
 import WorkoutList from '../../components/WorkoutList';
-// import PostCreateWidget from '../../components/PostCreateWidget/PostCreateWidget';
-
-// Import Actions
 import { addWorkoutRequest, fetchWorkouts, deleteWorkoutRequest } from '../../WorkoutActions';
-// import { toggleAddPost } from '../../../App/AppActions';
-
-// Import Selectors
-import { getShowAddPost } from '../../../App/AppReducer';
 import { getWorkouts } from '../../WorkoutReducer';
 import AddWorkout from "../../components/AddWorkout/AddWorkout";
 
@@ -19,7 +11,7 @@ class WorkoutListPage extends Component {
     this.props.dispatch(fetchWorkouts());
   }
 
-  handleDeletePost = workout => {
+  handleDeleteWorkout = workout => {
     if (confirm('Do you want to delete this post')) { // eslint-disable-line
       this.props.dispatch(deleteWorkoutRequest(workout));
     }
@@ -33,9 +25,9 @@ class WorkoutListPage extends Component {
   render() {
     return (
       <div>
-        <AddWorkout addPost={this.handleAddPost} showAddPost={this.props.showAddPost} />
+        <AddWorkout addWorkout={this.handleAddWorkout} />
 
-        <WorkoutList handleDeletePost={this.handleDeletePost} workouts={this.props.workouts} />
+        <WorkoutList handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts} />
       </div>
     );
   }
@@ -47,7 +39,6 @@ WorkoutListPage.need = [() => { return fetchWorkouts(); }];
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    showAddPost: getShowAddPost(state),
     workouts: getWorkouts(state),
   };
 }
@@ -60,7 +51,7 @@ WorkoutListPage.propTypes = {
 };
 
 WorkoutListPage.contextTypes = {
-  router: React.PropTypes.object,
+  router: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(WorkoutListPage);

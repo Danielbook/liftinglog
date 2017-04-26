@@ -3,7 +3,6 @@ import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
-import IntlWrapper from '../client/modules/Intl/IntlWrapper';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -21,6 +20,7 @@ import Helmet from 'react-helmet';
 
 // Import required modules
 import routes from '../client/routes';
+import workouts from './routes/workout.routes';
 import { fetchComponentData } from './util/fetchData';
 require('dotenv').config();
 
@@ -50,7 +50,7 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(passport.initialize());
-// app.use('/api', posts);
+app.use('/api', workouts);
 
 // Load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
@@ -136,9 +136,7 @@ app.use((req, res, next) => {
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
-            <IntlWrapper>
               <RouterContext {...renderProps} />
-            </IntlWrapper>
           </Provider>
         );
         const finalState = store.getState();

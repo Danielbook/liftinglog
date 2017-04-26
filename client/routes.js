@@ -1,14 +1,15 @@
 /* eslint-disable global-require */
-import React from 'react';
-import { Route, IndexRoute } from 'react-router';
-import App from './modules/App/App';
-import Stats from './modules/Stats/Stats';
-import Home from './components/Home/Home';
-import Workout from './modules/Workout/Workout';
-import Settings from './components/Settings/Settings';
-import LoginPage from './components/Login/LoginPage';
-import SignUpPage from './components/SignUp/SignUpPage';
-import Auth from './components/Auth/Auth';
+import React from "react";
+import {IndexRoute, Route} from "react-router";
+import App from "./modules/App/App";
+import Stats from "./modules/Stats/Stats";
+import Home from "./components/Home/Home";
+import Workout from "./modules/Workout/Workout";
+import Settings from "./components/Settings/Settings";
+import LoginPage from "./components/Login/LoginPage";
+import SignUpPage from "./components/SignUp/SignUpPage";
+import Auth from "./components/Auth/Auth";
+
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -18,15 +19,15 @@ if (typeof require.ensure !== 'function') {
 }
 
 /* Workaround for async react routes to work with react-hot-reloader till
-  https://github.com/reactjs/react-router/issues/2182 and
-  https://github.com/gaearon/react-hot-loader/issues/288 is fixed.
+ https://github.com/reactjs/react-router/issues/2182 and
+ https://github.com/gaearon/react-hot-loader/issues/288 is fixed.
  */
 if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
-  require('./modules/Post/pages/PostListPage/PostListPage');
-  require('./modules/Post/pages/PostDetailPage/PostDetailPage');
-  require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage');
+  // require('./modules/Post/pages/PostListPage/PostListPage');
+  // require('./modules/Post/pages/PostDetailPage/PostDetailPage');
   require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage');
+  require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage');
 }
 
 function requireAuth(nextState, replace) {
@@ -43,10 +44,10 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute
       getComponent={(nextState, callback) => {
-          if (Auth.isUserAuthenticated()) {
-            callback(null, require('./components/Dashboard/DashboardPage').default);
-          } else {
-            callback(null, Home);
+        if (Auth.isUserAuthenticated()) {
+          callback(null, require('./components/Dashboard/DashboardPage').default);
+        } else {
+          callback(null, Home);
         }
       }}
     />
@@ -67,17 +68,19 @@ export default (
     />
     <Route
       path="/workouts"
-      getComponent={(nextState, cb) => {
+      onEnter={requireAuth}
+      getComponent={(nextState, callback) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage').default);
+          callback(null, require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage').default);
         });
       }}
     />
     <Route
       path="/workouts/:slug-:cuid"
-      getComponent={(nextState, cb) => {
+      onEnter={requireAuth}
+      getComponent={(nextState, callback) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage').default);
+          callback(null, require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage').default);
         });
       }}
     />

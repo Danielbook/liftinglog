@@ -1,7 +1,5 @@
-/**
- * Created by Daniel on 2017-04-13.
- */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import SignUpForm from './SignUpForm';
 
 class SignUpPage extends React.Component {
