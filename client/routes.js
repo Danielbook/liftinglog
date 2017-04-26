@@ -35,7 +35,6 @@ function requireAuth(nextState, replace) {
   }
 }
 
-
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
@@ -48,7 +47,6 @@ export default (
             callback(null, Home);
         }
       }}
-
     />
     <Route
       path="/stats"

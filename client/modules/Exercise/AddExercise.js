@@ -21,7 +21,7 @@ let AddExercise = ({dispatch}) => {
         input.input.value = ''
       }}>
         <TextField
-          hintText="Exercise"
+          hintText=""
           floatingLabelText="Exercise Name"
           ref={node => {
             input = node

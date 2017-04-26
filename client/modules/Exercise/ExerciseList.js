@@ -4,7 +4,7 @@
 import React from 'react'
 import PropTypes from "prop-types";
 import Exercise from './Exercise'
-import {List, makeSelectable} from 'material-ui/List'
+import {List, makeSelectable} from 'material-ui/List';
 
 let SelectableList = makeSelectable(List);
 
