@@ -1,7 +1,7 @@
 {
-  "name": "mern-starter",
-  "version": "2.0.0",
-  "description": "Boilerplate project for building Isomorphic apps using React and Redux",
+  "name": "lifting-log",
+  "version": "1.0.0",
+  "description": "Minimalistic app for logging your workouts",
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node --harmony-proxies node_modules/.bin/ava",
     "watch:test": "npm run test -- --watch",
@@ -16,15 +16,12 @@
     "slate": "rimraf node_modules && npm install",
     "lint": "eslint client server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Hashnode/mern-starter.git"
-  },
+  "repository": "git+https://gitlab.ida.liu.se/danbo324/TDDD272017_Liftinglog",
   "bugs": {
     "url": "https://github.com/Hashnode/mern-starter/issues"
   },
   "homepage": "https://github.com/Hashnode/mern-starter#readme",
-  "author": "Prashant Abhishek <prashant.abhishek7g@gmail.com>, Mayank Chandola <imayankchd@gmail.com>, Sandeep Panda <sandeep@hashnode.com>, Syed Fazle Rahman <fazle@hashnode.com>, Alkshendra Maurya <alkshendra@hashnode.com>",
+  "author": "Daniel Böök",
   "license": "MIT",
   "dependencies": {
     "babel-core": "^6.9.1",
@@ -45,6 +42,7 @@
     "mongoose": "^4.9.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "prop-types": "^15.5.7",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-helmet": "^3.1.0",
@@ -56,8 +54,7 @@
     "redux-logger": "^3.0.1",
     "redux-thunk": "^2.1.0",
     "sanitize-html": "^1.11.4",
-    "validator": "^7.0.0",
-    "prop-types": "^15.5.7"
+    "validator": "^7.0.0"
   },
   "devDependencies": {
     "ava": "^0.15.2",
@@ -157,5 +154,6 @@
       "text",
       "html"
     ]
-  }
+  },
+  "main": "index.js"
 }
