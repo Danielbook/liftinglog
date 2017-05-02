@@ -11,11 +11,11 @@ import sanitizeHtml from "sanitize-html";
  */
 export function getWorkouts(req, res) {
   //TODO Get only the users workouts
-  console.log(req.session.currentUserID);
-  Workout.find().sort('-date').exec((err, workouts) => {
+  Workout.where('userID', req.session.currentUserID).find().sort('-date').exec((err, workouts) => {
     if (err) {
       res.status(500).send(err);
     }
+    console.log(workouts);
     res.json({workouts});
   });
 }
