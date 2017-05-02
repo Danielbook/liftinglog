@@ -1,24 +1,42 @@
 // Import Actions
-import { TOGGLE_ADD_POST } from './AppActions';
-import { TOGGLE_SIDEBAR } from './AppActions';
+import {SET_USER, REMOVE_USER, TOGGLE_SIDEBAR} from "./AppActions";
 
 // Initial State
 const initialState = {
-  showAddPost: false,
+  user:        {
+    userID: '',
+    userName: '',
+    userEmail: '',
+  },
   sidebarOpen: false,
 };
 
 const AppReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_ADD_POST:
+    case SET_USER:
       return {
         ...state,
-        showAddPost: !state.showAddPost,
+        user: {
+          userID:    action.userID,
+          userName:  action.userName,
+          userEmail: action.userEmail
+        }
       };
+
     case TOGGLE_SIDEBAR:
       return {
         ...state,
         sidebarOpen: !state.sidebarOpen,
+      };
+
+    case REMOVE_USER:
+      return {
+        ...state,
+        user: {
+          userID:    '',
+          userName:  '',
+          userEmail: ''
+        },
       };
 
     default:
@@ -27,10 +45,8 @@ const AppReducer = (state = initialState, action) => {
 };
 
 /* Selectors */
-
-// Get showAddPost
-export const getShowAddPost = state => state.app.showAddPost;
-
+export const getUserName = state => state.app.user.userName;
+export const getUserID = state => state.app.user.userID;
 export const getsidebarOpen = state => state.app.sidebarOpen;
 
 // Export Reducer

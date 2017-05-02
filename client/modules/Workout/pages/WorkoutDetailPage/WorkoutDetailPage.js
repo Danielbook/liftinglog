@@ -1,27 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
+import React from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import Helmet from "react-helmet";
 import TextField from "material-ui/TextField";
-
+import DatePicker from "material-ui/DatePicker";
+import Divider from "material-ui/Divider";
+import RaisedButton from "material-ui/RaisedButton";
+import NavigationChevronLeft from "material-ui/svg-icons/navigation/chevron-left";
+import {browserHistory} from "react-router";
 // Import Actions
-import { fetchWorkout } from '../../WorkoutActions';
-
+import {fetchWorkout} from "../../WorkoutActions";
 // Import Selectors
-import { getWorkout } from '../../WorkoutReducer';
+import {getWorkout} from "../../WorkoutReducer";
+import AddExercise from "../../../../components/Exercise/AddExercise";
+import ExerciseList from "../../../../components/Exercise/ExerciseList";
 
 export function WorkoutDetailPage(props) {
   return (
     <div>
-      <Helmet title={props.workout.title} />
+      <Helmet title={props.workout.title}/>
+      <div>
+        <RaisedButton
+          onTouchTap={browserHistory.goBack}
+          style={{marginTop: 20}}
+          icon={<NavigationChevronLeft />}
+        />
+      </div>
       <TextField
+        value={props.workout.title}
         hintText=""
-        floatingLabelText={props.workout.title}/>
-      {/*<div className={`${styles['single-post']} ${styles['post-detail']}`}>*/}
-        {/*<h3 className={styles['post-title']}>{props.post.title}</h3>*/}
-        {/*<p className={styles['author-name']}><FormattedMessage id="by" /> {props.post.name}</p>*/}
-        {/*<p className={styles['post-desc']}>{props.post.content}</p>*/}
-      {/*</div>*/}
+        floatingLabelText="Name of workout"/>
+
+      <DatePicker hintText="Date of workout" container="inline" mode="landscape"/>
+
+      <AddExercise />
+
+      <Divider />
+
+      <ExerciseList />
+
     </div>
   );
 }
@@ -41,8 +58,8 @@ function mapStateToProps(state, props) {
 WorkoutDetailPage.propTypes = {
   workout: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    cuid: PropTypes.string.isRequired,
+    slug:  PropTypes.string.isRequired,
+    cuid:  PropTypes.string.isRequired,
   }).isRequired,
 };
 

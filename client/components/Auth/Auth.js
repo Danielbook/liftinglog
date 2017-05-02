@@ -23,7 +23,6 @@ class Auth {
     } else { // Sorry! No Web Storage support..
       return false;
     }
-
   }
 
   /**

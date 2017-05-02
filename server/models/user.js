@@ -32,7 +32,6 @@ UserSchema.pre('save', function saveHook(next) {
   // proceed further only if the password is modified or the user is new
   if (!user.isModified('password')) return next();
 
-
   return bcrypt.genSalt((saltError, salt) => {
     if (saltError) { return next(saltError); }
 

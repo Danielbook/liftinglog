@@ -1,11 +1,21 @@
 // Export Constants
-export const TOGGLE_ADD_POST = 'TOGGLE_ADD_POST';
+export const SET_USER = 'SET_USER';
+export const REMOVE_USER = 'REMOVE_USER';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 
 // Export Actions
-export function toggleAddPost() {
+export function setUser(userID, userName, userEmail) {
   return {
-    type: TOGGLE_ADD_POST,
+    type: SET_USER,
+    userID,
+    userName,
+    userEmail
+  };
+}
+
+export function removeUser() {
+  return {
+    type: REMOVE_USER,
   };
 }
 

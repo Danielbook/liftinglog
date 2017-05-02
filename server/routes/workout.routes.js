@@ -1,6 +1,7 @@
-import { Router } from 'express';
+const express = require('express');
 import * as WorkoutController from '../controllers/workout.controller';
-const router = new Router();
+
+const router = new express.Router();
 
 // Get all Posts
 router.route('/workouts').get(WorkoutController.getWorkouts);
@@ -14,4 +15,4 @@ router.route('/workouts').post(WorkoutController.addWorkout);
 // Delete a post by cuid
 router.route('/workouts/:cuid').delete(WorkoutController.deleteWorkout);
 
-export default router;
+module.exports = router;

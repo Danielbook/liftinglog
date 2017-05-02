@@ -1,6 +1,8 @@
-import React from 'react';
-import Auth from '../Auth/Auth';
-import Dashboard from './Dashboard';
+import React from "react";
+import {connect} from "react-redux";
+import Auth from "../Auth/Auth";
+import Dashboard from "./Dashboard";
+import {setUser} from "../../modules/App/AppActions";
 
 class DashboardPage extends React.Component {
 
@@ -11,7 +13,10 @@ class DashboardPage extends React.Component {
     super(props);
 
     this.state = {
-      secretData: ''
+      secretData: '',
+      userID:     '',
+      userName:   '',
+      userEmail:  ''
     };
   }
 
@@ -28,8 +33,12 @@ class DashboardPage extends React.Component {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         this.setState({
-          secretData: xhr.response.message
+          secretData: xhr.response.message,
+          userID:     xhr.response.userID,
+          userName:   xhr.response.userName,
+          userEmail:  xhr.response.userEmail
         });
+        this.props.dispatch(setUser(xhr.response.userID,xhr.response.userName,xhr.response.userEmail))
       }
     });
     xhr.send();
@@ -39,9 +48,9 @@ class DashboardPage extends React.Component {
    * Render the component.
    */
   render() {
-    return (<Dashboard secretData={this.state.secretData} />);
+    return (<Dashboard  secretData={this.state.secretData}/>);
   }
-
 }
 
-export default DashboardPage;
+
+export default connect()(DashboardPage);

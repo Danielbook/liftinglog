@@ -1,7 +1,7 @@
-import Workout from '../models/post';
-import cuid from 'cuid';
-import slug from 'limax';
-import sanitizeHtml from 'sanitize-html';
+import Workout from "../models/workout";
+import cuid from "cuid";
+import slug from "limax";
+import sanitizeHtml from "sanitize-html";
 
 /**
  * Get all workout
@@ -10,11 +10,12 @@ import sanitizeHtml from 'sanitize-html';
  * @returns void
  */
 export function getWorkouts(req, res) {
-  Workout.find().sort('-dateAdded').exec((err, workouts) => {
+  //TODO Get only the users workouts
+  Workout.find().sort('-date').exec((err, workouts) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ workouts });
+    res.json({workouts});
   });
 }
 
@@ -25,7 +26,7 @@ export function getWorkouts(req, res) {
  * @returns void
  */
 export function addWorkout(req, res) {
-  if (!req.body.workout.name) {
+  if (!req.body.workout.title) {
     res.status(403).end();
   }
 
@@ -33,13 +34,15 @@ export function addWorkout(req, res) {
 
   // Let's sanitize inputs
   newWorkout.title = sanitizeHtml(newWorkout.title);
-  newWorkout.slug = slug(newWorkout.title.toLowerCase(), { lowercase: true });
+  newWorkout.slug = slug(newWorkout.title.toLowerCase(), {lowercase: true});
   newWorkout.cuid = cuid();
+  newWorkout.userID = sanitizeHtml(newWorkout.userID);
+
   newWorkout.save((err, saved) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ workout: saved });
+    res.json({workout: saved});
   });
 }
 
@@ -50,11 +53,11 @@ export function addWorkout(req, res) {
  * @returns void
  */
 export function getWorkout(req, res) {
-  Workout.findOne({ cuid: req.params.cuid }).exec((err, workout) => {
+  Workout.findOne({cuid: req.params.cuid}).exec((err, workout) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({ workout });
+    res.json({workout});
   });
 }
 
@@ -65,7 +68,7 @@ export function getWorkout(req, res) {
  * @returns void
  */
 export function deleteWorkout(req, res) {
-  Workout.findOne({ cuid: req.params.cuid }).exec((err, workout) => {
+  Workout.findOne({cuid: req.params.cuid}).exec((err, workout) => {
     if (err) {
       res.status(500).send(err);
     }

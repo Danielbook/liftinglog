@@ -8,6 +8,7 @@ import Workout from "./modules/Workout/Workout";
 import Settings from "./components/Settings/Settings";
 import LoginPage from "./components/Login/LoginPage";
 import SignUpPage from "./components/SignUp/SignUpPage";
+import LogoutPage from "./components/Logout/Logout";
 import Auth from "./components/Auth/Auth";
 
 
@@ -94,12 +95,7 @@ export default (
     />
     <Route
       path='/logout'
-      onEnter={(nextState, replace) => {
-        Auth.deauthenticateUser();
-
-        // change the current URL to /
-        replace('/');
-      }}
+      component={LogoutPage}
     />
 
 

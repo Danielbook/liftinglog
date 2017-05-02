@@ -15,9 +15,10 @@ export function addWorkout(workout) {
 
 export function addWorkoutRequest(workout) {
   return (dispatch) => {
-    return callApi('workouts', 'workout', {
+    return callApi('workouts', 'POST', {
       workout: {
-        name: workout.name,
+        title: workout.title,
+        userID: workout.userID
       },
     }).then(res => dispatch(addWorkout(res.workout)));
   };
@@ -32,9 +33,7 @@ export function addWorkouts(workouts) {
 
 export function fetchWorkouts() {
   return (dispatch) => {
-    return callApi('workouts').then(res => {
-      dispatch(addWorkouts(res.workouts));
-    });
+    return callApi('workouts').then(res => dispatch(addWorkouts(res.workouts)));
   };
 }
 

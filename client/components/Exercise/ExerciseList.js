@@ -29,6 +29,7 @@ const ExerciseList = ({ exercises }) => (
 //   }
 // };
 
-export default connect(mapStateToProps,
+export default connect(
+  mapStateToProps,
   // mapDispatchToProps
 )(ExerciseList);

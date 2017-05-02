@@ -5,16 +5,17 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
 
 export class AddWorkout extends Component {
-  addWorkout = () => {
-    const titleRef = this.refs.title;
-    if (this.name) {
-      this.props.addWorkout(this.name);
-      // titleRef.value = '';
+  constructor() {
+    super();
+    this.state = {
+      title: ""
     }
-  };
+  }
 
-  onUpdate = (value) => {
-    this.name = value;
+  addWorkout = () => {
+    if (this.state.title !== "") {
+      this.props.addWorkout(this.state.title);
+    }
   };
 
   render() {
@@ -22,7 +23,7 @@ export class AddWorkout extends Component {
       <div>
         <TextField
           floatingLabelText="Workout Name"
-          onChange={this.onUpdate}
+          onChange={e => this.setState({title: e.target.value})}
         />
         <FloatingActionButton
           style={{marginLeft: 20}}
@@ -32,8 +33,7 @@ export class AddWorkout extends Component {
           <ContentAdd />
         </FloatingActionButton>
       </div>
-    )
-      ;
+    );
   }
 }
 

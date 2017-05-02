@@ -5,6 +5,7 @@ import WorkoutList from '../../components/WorkoutList';
 import { addWorkoutRequest, fetchWorkouts, deleteWorkoutRequest } from '../../WorkoutActions';
 import { getWorkouts } from '../../WorkoutReducer';
 import AddWorkout from "../../components/AddWorkout/AddWorkout";
+import {getUserID} from "../../../App/AppReducer";
 
 class WorkoutListPage extends Component {
   componentDidMount() {
@@ -17,9 +18,9 @@ class WorkoutListPage extends Component {
     }
   };
 
-  handleAddWorkout = (name) => {
-    // this.props.dispatch(toggleAddPost());
-    this.props.dispatch(addWorkoutRequest({ name }));
+  handleAddWorkout = (title) => {
+    let userID = this.props.userID;
+    this.props.dispatch(addWorkoutRequest({ title, userID}));
   };
 
   render() {
@@ -39,6 +40,7 @@ WorkoutListPage.need = [() => { return fetchWorkouts(); }];
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
+    userID: getUserID(state),
     workouts: getWorkouts(state),
   };
 }

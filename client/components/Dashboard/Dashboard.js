@@ -1,17 +1,16 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import {Card, CardText, CardTitle} from "material-ui/Card";
 
-const Dashboard = ({ secretData }) => (
+const Dashboard = ({user, secretData}) => (
   <div>
     <Card className="container">
-    <CardTitle
-      title="Dashboard"
-      subtitle="You should get access to this page only after authentication."
-    />
+      <CardTitle
+        title="Dashboard"
+      />
 
-    {secretData && <CardText style={{ fontSize: '16px', color: 'green' }}>{secretData}</CardText>}
-  </Card>
+      {secretData && <CardText style={{fontSize: '16px', color: 'green'}}>{secretData}</CardText>}
+    </Card>
   </div>
 );
 

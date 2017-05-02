@@ -1,7 +1,10 @@
+import 'dotenv/config';
 import Express from 'express';
+import session from 'express-session';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+let cookieParser = require('cookie-parser');
 import path from 'path';
 
 // Webpack Requirements
@@ -20,19 +23,17 @@ import Helmet from 'react-helmet';
 
 // Import required modules
 import routes from '../client/routes';
-import workouts from './routes/workout.routes';
 import { fetchComponentData } from './util/fetchData';
-require('dotenv').config();
 
 // Auth
 const passport = require('passport');
-import authConfig from './config';
+import serverConfig from './config';
 
 mongoose.Promise = global.Promise;
 
 // connect to the database and load models
-require('./models').connect(authConfig.dbUri);
-// require('./models').connect(authConfig.dbUri_remote); // TODO Fix remote access to server
+let models = require('./models');
+models.connect(serverConfig.mongoURL);
 
 // Initialize the Express App
 const app = new Express();
@@ -44,13 +45,22 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
+let sessionOpts = {
+  saveUninitialized: false,
+  resave: false,
+  secret: 'keyboard cat',
+  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+};
+
 // Apply body Parser and server public assets and routes
 app.use(compression());
-app.use(bodyParser.json({ limit: '20mb' }));
-app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
+app.use(cookieParser(sessionOpts.secret));
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
+app.use(session(sessionOpts));
 app.use(passport.initialize());
-app.use('/api', workouts);
+app.use(passport.session());
 
 // Load passport strategies
 const localSignupStrategy = require('./passport/local-signup');
@@ -58,13 +68,31 @@ const localLoginStrategy = require('./passport/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
+// used to serialize the user for the session
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+const workoutsRoute = require('./routes/workout.routes');
+app.use('/api', workoutsRoute);
+
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);
 
+const User = require('mongoose').model('User');
+
 // routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
+
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
@@ -151,9 +179,9 @@ app.use((req, res, next) => {
 });
 
 // start app
-app.listen(authConfig.port, (error) => {
+app.listen(serverConfig.PORT, (error) => {
   if (!error) {
-    console.log(`MERN is running on port: ${authConfig.port}`); // eslint-disable-line
+    console.log(`App is running!`); // eslint-disable-line
   }
 });
 
