@@ -80,9 +80,6 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-const workoutsRoute = require('./routes/workout.routes');
-app.use('/api', workoutsRoute);
-
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);
@@ -92,7 +89,8 @@ const User = require('mongoose').model('User');
 // routes
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
-
+const workoutsRoute = require('./routes/workout.routes');
+app.use('/api', workoutsRoute);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
