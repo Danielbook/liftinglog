@@ -94,7 +94,6 @@ app.use('/api', workoutsRoute);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
-
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind();

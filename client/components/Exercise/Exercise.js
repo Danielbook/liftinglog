@@ -7,6 +7,7 @@ import Badge from "material-ui/Badge";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import AddSet from "../Set/AddSet";
+import SetList from "../Set/SetList";
 
 const Exercise = ({id, text}) => (
   <div>
@@ -17,9 +18,7 @@ const Exercise = ({id, text}) => (
     >
       {text}
     </Badge>
-
-
-
+    <SetList />
     <div>
       <AddSet />
     </div>

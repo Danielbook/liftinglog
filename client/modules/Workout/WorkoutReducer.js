@@ -27,11 +27,6 @@ const WorkoutReducer = (state = initialState, action) => {
 
 /* Selectors */
 
-// console.log(state.app.user.userID);
-// console.log(state.workouts);
-// console.log(state.workouts.data.filter(workout => workout.userID === state.app.user.userID));
-// return state.workouts.data.filter(workout => workout.userID === state.app.user.userID);
-
 // Get all workouts
 export const getWorkouts = state => state.workouts.data;
 

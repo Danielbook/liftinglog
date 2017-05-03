@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextField from 'material-ui/TextField';
 
-const Set = ({id}) => (
+const Set = () => (
   <div>
     <TextField
       floatingLabelText="Weight"
@@ -17,7 +17,6 @@ const Set = ({id}) => (
 );
 
 Set.propTypes = {
-  id:           PropTypes.number.isRequired,
 };
 
 

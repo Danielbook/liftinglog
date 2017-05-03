@@ -63,11 +63,6 @@ export default (
       onEnter={requireAuth}
     />
     <Route
-      path="/workout"
-      component={Workout}
-      onEnter={requireAuth}
-    />
-    <Route
       path="/workouts"
       onEnter={requireAuth}
       getComponent={(nextState, callback) => {

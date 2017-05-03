@@ -4,12 +4,11 @@
 import React from 'react'
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import Exercise from './Exercise'
 import Set from "./Set";
 
 const mapStateToProps = (state) => {
   return {
-    exercises: state.exercises
+    sets: state.sets
   }
 };
 
@@ -22,13 +21,6 @@ const SetList = ({ sets }) => (
 );
 
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//
-//   }
-// };
-
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
 )(SetList);
