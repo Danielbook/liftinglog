@@ -15,7 +15,9 @@ const mapStateToProps = (state) => {
 const SetList = ({ sets }) => (
   <div>
     {sets.map(set =>
-      <Set />
+      <Set
+        key={sets.numberOfSets}
+      />
     )}
   </div>
 );

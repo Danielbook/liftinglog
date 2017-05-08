@@ -2,16 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Card, CardText, CardTitle} from "material-ui/Card";
 
-const Dashboard = ({user, secretData}) => (
-  <div>
-    <Card className="container">
-      <CardTitle
-        title="Dashboard"
-      />
-
-      {secretData && <CardText style={{fontSize: '16px', color: 'green'}}>{secretData}</CardText>}
-    </Card>
-  </div>
+const Dashboard = ({secretData}) => (
+  <Card className="container">
+    <CardTitle
+      className="item"
+      title="Dashboard"
+    />
+    {secretData && <CardText style={{fontSize: '16px', color: 'green'}}>{secretData}</CardText>}
+  </Card>
 );
 
 Dashboard.propTypes = {

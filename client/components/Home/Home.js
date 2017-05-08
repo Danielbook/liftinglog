@@ -7,7 +7,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <h1>Welcome, please login or sign up!</h1>
       </div>
     );

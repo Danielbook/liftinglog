@@ -18,7 +18,7 @@ let AddExercise = ({dispatch}) => {
         if (!input.input.value.trim()) {
           return
         }
-        dispatch(addExercise(input.input.value, 0));
+        dispatch(addExercise(input.input.value));
         input.input.value = ''
       }}>
         <TextField

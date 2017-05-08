@@ -101,7 +101,9 @@ export class App extends Component {
 
           <Sidebar />
 
-          <div className={appContentStyle}>
+          <div
+            // style={{display: 'flex', justifyContent: 'center'}}
+               className={appContentStyle}>
             { this.props.children }
           </div>
         </div>

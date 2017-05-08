@@ -48,7 +48,7 @@ export default (
         if (Auth.isUserAuthenticated()) {
           callback(null, require('./components/Dashboard/DashboardPage').default);
         } else {
-          callback(null, Home);
+          callback(null, SignUpPage);
         }
       }}
     />
