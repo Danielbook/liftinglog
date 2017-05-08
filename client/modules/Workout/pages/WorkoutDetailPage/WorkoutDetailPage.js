@@ -14,24 +14,26 @@ import {fetchWorkout} from "../../WorkoutActions";
 import {getWorkout} from "../../WorkoutReducer";
 import AddExercise from "../../../../components/Exercise/AddExercise";
 import ExerciseList from "../../../../components/Exercise/ExerciseList";
+import {Row} from "react-flexbox-grid";
 
 export function WorkoutDetailPage(props) {
   return (
     <div>
       <Helmet title={props.workout.title}/>
-      <div>
         <RaisedButton
           onTouchTap={browserHistory.goBack}
           style={{marginTop: 20}}
           icon={<NavigationChevronLeft />}
         />
-      </div>
+      <Row>
       <TextField
         value={props.workout.title}
         hintText=""
         floatingLabelText="Name of workout"/>
 
       <DatePicker hintText="Date of workout" container="inline" mode="landscape"/>
+
+      </Row>
 
       <AddExercise />
 

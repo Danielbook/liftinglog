@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import WorkoutListItem from "./WorkoutListItem/WorkoutListItem";
+import {Row} from "react-flexbox-grid";
 
 function WorkoutList(props) {
   return (

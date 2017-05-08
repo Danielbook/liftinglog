@@ -1,18 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentRemove from "material-ui/svg-icons/content/remove";
+
 import {Link} from "react-router";
+import {Col, Row} from "react-flexbox-grid";
 
 function WorkoutListItem(props) {
   return (
-    <div>
-      <h3>
+    <Row style={{paddingBottom: 20}}>
+      <Col xs={10}>
         <Link to={`/workouts/${props.workout.slug}-${props.workout.cuid}`}>
           {props.workout.title}
         </Link>
-      </h3>
-      <p><a href="#" onClick={props.onDelete}>Delete Post</a></p>
-      <hr/>
-    </div>
+      </Col>
+      <Col xs={2}>
+        <FloatingActionButton
+          mini={true}
+          secondary={true}
+          onTouchTap={props.onDelete}
+        >
+          <ContentRemove />
+        </FloatingActionButton>
+      </Col>
+    </Row>
   );
 }
 

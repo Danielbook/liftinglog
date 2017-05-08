@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import {Card, CardText, CardTitle} from "material-ui/Card";
 
 const Dashboard = ({secretData}) => (
-  <Card className="container">
+  <Card>
     <CardTitle
-      className="item"
       title="Dashboard"
     />
-    {secretData && <CardText style={{fontSize: '16px', color: 'green'}}>{secretData}</CardText>}
+    <CardText style={{fontSize: '16px', color: 'green'}}>{secretData}</CardText>
   </Card>
 );
 

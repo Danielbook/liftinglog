@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import WorkoutList from '../../components/WorkoutList';
-import { addWorkoutRequest, fetchWorkouts, deleteWorkoutRequest } from '../../WorkoutActions';
-import { getWorkouts } from '../../WorkoutReducer';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import WorkoutList from "../../components/WorkoutList";
+import {addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts} from "../../WorkoutActions";
+import {getWorkouts} from "../../WorkoutReducer";
 import AddWorkout from "../../components/AddWorkout/AddWorkout";
 import {getUserID} from "../../../App/AppReducer";
+import Divider from "material-ui/Divider";
+import {Row} from "react-flexbox-grid";
 
 class WorkoutListPage extends Component {
   componentDidMount() {
@@ -20,27 +22,35 @@ class WorkoutListPage extends Component {
 
   handleAddWorkout = (title) => {
     let userID = this.props.userID;
-    this.props.dispatch(addWorkoutRequest({ title, userID}));
+    this.props.dispatch(addWorkoutRequest({title, userID}));
   };
 
   render() {
     return (
       <div>
-        <AddWorkout addWorkout={this.handleAddWorkout} />
+        <h1>Workouts</h1>
+        <Divider/>
+        <Row style={{paddingBottom: 40}}>
+          <AddWorkout addWorkout={this.handleAddWorkout}/>
+        </Row>
 
-        <WorkoutList handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts} />
+        <Row>
+          <WorkoutList handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts}/>
+        </Row>
       </div>
     );
   }
 }
 
 // Actions required to provide data for this component to render in sever side.
-WorkoutListPage.need = [() => { return fetchWorkouts(); }];
+WorkoutListPage.need = [() => {
+  return fetchWorkouts();
+}];
 
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    userID: getUserID(state),
+    userID:   getUserID(state),
     workouts: getWorkouts(state),
   };
 }

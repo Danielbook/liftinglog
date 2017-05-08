@@ -23,6 +23,7 @@ import classnames from "classnames/bind";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import {Link} from "react-router";
 import Auth from "../../components/Auth/Auth";
+import {Grid} from "react-flexbox-grid";
 let cx = classnames.bind(styles);
 
 // import { switchLanguage } from '../../modules/Intl/IntlActions';
@@ -101,11 +102,11 @@ export class App extends Component {
 
           <Sidebar />
 
-          <div
-            // style={{display: 'flex', justifyContent: 'center'}}
-               className={appContentStyle}>
+          <Grid
+            fluid
+            className={appContentStyle}>
             { this.props.children }
-          </div>
+          </Grid>
         </div>
       </MuiThemeProvider>
     );

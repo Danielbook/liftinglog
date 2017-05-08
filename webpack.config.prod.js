@@ -6,7 +6,9 @@ var cssnext = require('postcss-cssnext');
 var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
 var cssnano = require('cssnano');
-
+require.extensions['.css'] = () => {
+  return;
+};
 module.exports = {
   devtool: 'hidden-source-map',
 
