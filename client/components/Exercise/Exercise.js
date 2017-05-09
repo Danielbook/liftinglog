@@ -4,21 +4,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Badge from "material-ui/Badge";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
 import AddSet from "../Set/AddSet";
 import SetList from "../Set/SetList";
 
-const Exercise = ({id, text}) => (
+const Exercise = ({exercise}) => (
   <div>
     <Badge
-      value={id}
+      value={exercise._id}
       badgeContent={1}
       primary={true}
     >
-      {text}
+      {exercise.title}
     </Badge>
-    <SetList />
+    <SetList sets={exercise.sets}/>
     <div>
       <AddSet />
     </div>
@@ -26,8 +24,9 @@ const Exercise = ({id, text}) => (
 );
 
 Exercise.propTypes = {
-  id:   PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
+  exercise: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 

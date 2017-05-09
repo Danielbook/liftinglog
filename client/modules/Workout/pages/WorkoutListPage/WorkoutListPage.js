@@ -6,7 +6,6 @@ import {addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts} from "../../Work
 import {getWorkouts} from "../../WorkoutReducer";
 import AddWorkout from "../../components/AddWorkout/AddWorkout";
 import {getUserID} from "../../../App/AppReducer";
-import Divider from "material-ui/Divider";
 import {Row} from "react-flexbox-grid";
 
 class WorkoutListPage extends Component {
@@ -28,9 +27,11 @@ class WorkoutListPage extends Component {
   render() {
     return (
       <div>
-        <h1>Workouts</h1>
-        <Divider/>
-        <Row style={{paddingBottom: 40}}>
+        <Row center="xs">
+          <h1>Workouts</h1>
+        </Row>
+
+        <Row center="xs" style={{paddingBottom: 40}}>
           <AddWorkout addWorkout={this.handleAddWorkout}/>
         </Row>
 

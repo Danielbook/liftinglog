@@ -9,12 +9,12 @@ import {Col, Row} from "react-flexbox-grid";
 function WorkoutListItem(props) {
   return (
     <Row style={{paddingBottom: 20}}>
-      <Col xs={10}>
+      <Col xs>
         <Link to={`/workouts/${props.workout.slug}-${props.workout.cuid}`}>
           {props.workout.title}
         </Link>
       </Col>
-      <Col xs={2}>
+      <Col xs>
         <FloatingActionButton
           mini={true}
           secondary={true}

@@ -3,16 +3,25 @@ import * as WorkoutController from '../controllers/workout.controller';
 
 const router = new express.Router();
 
-// Get all Posts
+// Get all workouts
 router.route('/workouts').get(WorkoutController.getWorkouts);
 
-// Get one post by cuid
+// Get one workout by cuid
 router.route('/workouts/:cuid').get(WorkoutController.getWorkout);
 
-// Add a new Post
+// Add a new workout
 router.route('/workouts').post(WorkoutController.addWorkout);
 
-// Delete a post by cuid
+// Delete a workout by cuid
 router.route('/workouts/:cuid').delete(WorkoutController.deleteWorkout);
+
+// Add a new exercise for the workout
+router.route('/workouts/exercise').post(WorkoutController.addExercise);
+
+// Get one workouts exercises
+router.route('/workouts/exercise/:cuid').get(WorkoutController.getExercises);
+
+// Delete an exercise by cuid
+router.route('/workouts/exercise/:cuid').delete(WorkoutController.deleteExercise);
 
 module.exports = router;

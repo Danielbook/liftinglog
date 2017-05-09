@@ -1,40 +1,45 @@
 /**
  * Created by Daniel on 2017-04-11.
  */
-import React from "react";
-import {connect} from "react-redux";
-import {addExercise} from "./ExerciseActions";
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
+import {Row} from "react-flexbox-grid";
 
-let AddExercise = ({dispatch}) => {
-  let input;
+export class AddExercise extends Component {
+  constructor() {
+    super();
+    this.state = {
+      title: ""
+    }
+  }
 
-  return (
-    <div>
-      <form onSubmit={e => {
-        e.preventDefault();
-        if (!input.input.value.trim()) {
-          return
-        }
-        dispatch(addExercise(input.input.value));
-        input.input.value = ''
-      }}>
+  addExercise = () => {
+    if (this.state.title !== "") {
+      this.props.addExercise(this.state.title);
+    }
+  };
+
+  render() {
+    return (
+      <div>
         <TextField
-          hintText=""
           floatingLabelText="Exercise Name"
-          ref={node => {
-            input = node
-          }}/>
-        <FloatingActionButton mini={true} type="submit">
+          onChange={e => this.setState({title: e.target.value})}
+        />
+        <FloatingActionButton onTouchTap={this.addExercise} mini={true}>
           <ContentAdd/>
         </FloatingActionButton>
-      </form>
-    </div>
-  )
-};
+      </div>
+    );
+  }
+}
 
-AddExercise = connect()(AddExercise);
+
+AddExercise.propTypes = {
+  addExercise: PropTypes.func.isRequired,
+};
 
 export default AddExercise;

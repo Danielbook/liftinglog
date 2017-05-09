@@ -1,30 +1,40 @@
-/**
- * Created by Daniel on 2017-04-11.
- */
-const exercise = (state = {}, action) => {
+import {ADD_EXERCISE, ADD_EXERCISES, DELETE_EXERICSE} from "./ExerciseActions";
+
+// Initial State
+const initialState = {data: []};
+
+const ExerciseReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_EXERCISE':
+    case ADD_EXERCISE :
       return {
-        id:        action.id,
-        text:      action.text,
-        numberOfSets: action.numberOfSets,
-        completed: false
+        data: [action.exercise, ...state.data],
       };
+
+    case ADD_EXERCISES :
+      return {
+        data: action.exercises,
+      };
+
+    case DELETE_EXERICSE :
+      return {
+        data: state.data.filter(exercise => exercise.cuid !== action.cuid),
+      };
+
     default:
-      return state
+      return state;
   }
 };
 
-const exercises = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_EXERCISE':
-      return [
-        ...state,
-        exercise(undefined, action)
-      ];
-    default:
-      return state
-  }
-};
+/* Selectors */
 
-export default exercises
+// Get all workouts
+export const getExercises = state => state.exercises.data;
+
+// export const getExercises = (state, cuid) => state.exercises.data.filter(workout => {
+//   if(workout.cuid === cuid) {
+//     return workout.exercises;
+//   }
+// })[0];
+
+// Export Reducer
+export default ExerciseReducer;

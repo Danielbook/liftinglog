@@ -5,32 +5,11 @@ export const ADD_EXERCISE = 'ADD_EXERCISE';
 export const ADD_EXERCISES = 'ADD_EXERCISES';
 export const DELETE_EXERCISE = 'DELETE_EXERCISE';
 
-let nextExerciseId = 0;
-// export const addExercise = (text, numberOfSets) => {
-//   return {
-//     type: 'ADD_EXERCISE',
-//     id:   nextExerciseId++,
-//     numberOfSets: numberOfSets,
-//     text
-//   }
-// };
-
 // Export Actions
-export function addExercise(text, exercise) {
+export function addExercise(exercise) {
   return {
     type: ADD_EXERCISE,
-    id:   nextExerciseId++,
-    text,
-  };
-}
-
-export function addExerciseRequest(exercise) {
-  return (dispatch) => {
-    return callApi('exercise', 'POST', {
-      exercise: {
-        name: exercise.name,
-      }
-    }).then(res => dispatch(addExercise(res.exercise)));
+    exercise,
   };
 }
 
@@ -41,21 +20,32 @@ export function addExercises(exercises) {
   };
 }
 
-export function fetchExercises() {
+export function addExerciseRequest(exercise) {
   return (dispatch) => {
-    return callApi('exercise').then(res => dispatch(addExercises(res.exercises)));
+    return callApi('workouts/exercise', 'POST', {
+      exercise: {
+        title: exercise.title,
+        workoutCUID: exercise.cuid
+      }
+    }).then(res => dispatch(addExercise(res.exercise)));
   };
 }
 
-export function deleteExercise(id) {
+export function fetchExercises(cuid) {
+  return (dispatch) => {
+    return callApi(`workouts/exercise/${cuid}`).then(res => dispatch(addExercises(res.exercises)));
+  };
+}
+
+export function deleteExercise(cuid) {
   return {
     type: DELETE_EXERCISE,
-    id,
+    cuid,
   };
 }
 
-export function deleteExerciseRequest(id) {
+export function deleteExerciseRequest(cuid) {
   return (dispatch) => {
-    return callApi(`exercises/${id}`, 'delete').then(() => dispatch(deleteExercise(id)));
+    return callApi(`workouts/exercises/${cuid}`, 'delete').then(() => dispatch(deleteExercise(cuid)));
   };
 }

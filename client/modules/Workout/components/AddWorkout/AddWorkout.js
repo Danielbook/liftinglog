@@ -22,13 +22,13 @@ export class AddWorkout extends Component {
   render() {
     return (
       <Row>
-        <Col xs={10}>
+        <Col xs={9}>
           <TextField
             floatingLabelText="Workout Name"
             onChange={e => this.setState({title: e.target.value})}
           />
         </Col>
-        <Col xs={2}>
+        <Col xs={3}>
           <FloatingActionButton
             style={{marginLeft: 40}}
             type="submit"

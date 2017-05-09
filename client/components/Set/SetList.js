@@ -6,11 +6,6 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Set from "./Set";
 
-const mapStateToProps = (state) => {
-  return {
-    sets: state.sets
-  }
-};
 
 const SetList = ({ sets }) => (
   <div>
@@ -23,6 +18,4 @@ const SetList = ({ sets }) => (
 );
 
 
-export default connect(
-  mapStateToProps,
-)(SetList);
+export default SetList;

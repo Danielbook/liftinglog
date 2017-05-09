@@ -2,28 +2,24 @@
  * Created by Daniel on 2017-04-11.
  */
 import React from 'react'
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Exercise from './Exercise'
 
-const mapStateToProps = (state) => {
-  return {
-    exercises: state.exercises
-  }
-};
 
 const ExerciseList = ({ exercises }) => (
+
   <div>
     {exercises.map(exercise =>
       <Exercise
-        key={exercise.id}
-        {...exercise}
+        key={exercise._id}
+        exercise={exercise}
       />
     )}
   </div>
 );
 
-export default connect(
-  mapStateToProps,
-  // mapDispatchToProps
-)(ExerciseList);
+// ExerciseList.propTypes = {
+//   exercises: PropTypes.object.isRequired,
+// };
+
+export default ExerciseList;
