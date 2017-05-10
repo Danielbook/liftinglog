@@ -96,34 +96,16 @@ export function addExercise(req, res) {
   newExercise.save((err, saved) => {
     if (err) res.status(500).send(err);
 
+    Workout
+      .findOneAndUpdate(
+        {cuid: req.body.exercise.workoutCUID},
+        {$push: {exercises: newExercise._id}},
+        {upsert: true, new: true},
+        function (err, data) {
+          if (err) console.log(err);
+        });
 
-
-  // Workout
-  //   .findOne({cuid: req.body.exercise.workoutCUID})
-  //   .populate('exercises')
-  //   .exec((err, workout) => {
-  //     if (err) res.status(500).send(err);
-  //     console.log(workout);
-  //     // workout.exercises.push(newExercise);
-  //     // workout.save( (err, saved) => {
-  //     //   if (err) res.status(500).send(err);
-  //     //   res.json({exercise: saved.exercises});
-  //     // });
-  //   });
-
-  Workout
-    .findOneAndUpdate(
-      {cuid: req.body.exercise.workoutCUID},
-      {$push: {exercises: newExercise}},
-      {upsert: true, new: true},
-      function (err, data) {
-        if (err) console.log(err);
-        // console.log("Data: " + data);
-      });
-
-    // console.log("New exercise:    " + saved);
     res.json({exercise: saved});
-
   });
 }
 
@@ -134,8 +116,6 @@ export function getExercises(req, res) {
     .exec((err, workout) => {
       if (err) res.status(500).send(err);
       const exercises = workout.exercises;
-      // console.log("Exercises:     " + exercises);
-      // let exercises = workout.exercises;
       res.json({exercises});
     });
 }
