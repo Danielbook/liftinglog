@@ -7,6 +7,10 @@ import Badge from "material-ui/Badge";
 import AddSet from "../Set/AddSet";
 import SetList from "../Set/SetList";
 
+
+// https://github.com/callemall/material-ui/issues/3543 to stop selecting both row and item in LIST
+
+
 const Exercise = ({exercise}) => (
   <div>
     <Badge

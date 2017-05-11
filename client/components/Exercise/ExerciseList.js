@@ -6,13 +6,14 @@ import PropTypes from "prop-types";
 import Exercise from './Exercise'
 
 
-const ExerciseList = ({ exercises }) => (
+const ExerciseList = ({ exercises, onDelete }) => (
 
   <div>
     {exercises.map(exercise =>
       <Exercise
         key={exercise._id}
         exercise={exercise}
+        onDelete={onDelete}
       />
     )}
   </div>

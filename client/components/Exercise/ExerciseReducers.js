@@ -1,4 +1,4 @@
-import {ADD_EXERCISE, ADD_EXERCISES, DELETE_EXERICSE} from "./ExerciseActions";
+import {ADD_EXERCISE, ADD_EXERCISES, DELETE_EXERCISE} from "./ExerciseActions";
 
 // Initial State
 const initialState = {data: []};
@@ -15,7 +15,7 @@ const ExerciseReducer = (state = initialState, action) => {
         data: action.exercises,
       };
 
-    case DELETE_EXERICSE :
+    case DELETE_EXERCISE :
       return {
         data: state.data.filter(exercise => exercise.cuid !== action.cuid),
       };

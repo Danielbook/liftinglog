@@ -44,20 +44,12 @@ class WorkoutDetailPage extends Component {
     this.props.dispatch(addExerciseRequest({title, cuid}));
   };
 
-  logg = () => this.props.dispatch(fetchExercises(this.props.workout.cuid));
-
   render() {
     return (
       <div>
         <Helmet title={this.props.workout.title}/>
         <RaisedButton
           onTouchTap={browserHistory.goBack}
-          style={{marginTop: 20}}
-          icon={<NavigationChevronLeft />}
-        />
-
-        <RaisedButton
-          onTouchTap={this.logg}
           style={{marginTop: 20}}
           icon={<NavigationChevronLeft />}
         />
@@ -74,7 +66,7 @@ class WorkoutDetailPage extends Component {
 
         <Divider />
 
-        <ExerciseList exercises={this.props.exercises}/>
+        <ExerciseList exercises={this.props.exercises} onDelete={this.handleDeleteExercise}/>
 
       </div>
     );
