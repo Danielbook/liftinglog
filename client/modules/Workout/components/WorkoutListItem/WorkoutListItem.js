@@ -2,34 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentRemove from "material-ui/svg-icons/content/remove";
-
+import {ListItem} from "material-ui/List";
 import {Link} from "react-router";
-import {Col, Row} from "react-flexbox-grid";
 
 function WorkoutListItem(props) {
   return (
-    <Row style={{paddingBottom: 20}}>
-      <Col xs>
-        <Link to={`/workouts/${props.workout.slug}-${props.workout.cuid}`}>
-          {props.workout.title}
-        </Link>
-      </Col>
-      <Col xs>
-        <FloatingActionButton
-          mini={true}
-          secondary={true}
-          onTouchTap={props.onDelete}
-        >
-          <ContentRemove />
-        </FloatingActionButton>
-      </Col>
-    </Row>
+    <ListItem
+      primaryText={props.workout.title}
+      secondaryText={props.workout.date}
+      containerElement={<Link to={`/workouts/${props.workout.slug}-${props.workout.cuid}`}/>}
+      rightIconButton={<FloatingActionButton
+        mini={true}
+        secondary={true}
+        onClick={props.onDelete}
+      >
+        <ContentRemove />
+      </FloatingActionButton>}
+    />
   );
 }
 
 WorkoutListItem.propTypes = {
   workout:  PropTypes.shape({
     title: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
     slug:  PropTypes.string.isRequired,
     cuid:  PropTypes.string.isRequired,
   }).isRequired,

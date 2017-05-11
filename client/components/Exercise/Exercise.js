@@ -40,7 +40,9 @@ const Exercise = (props) => (
 Exercise.propTypes = {
   exercise: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    sets: PropTypes.array.isRequired,
   }).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 

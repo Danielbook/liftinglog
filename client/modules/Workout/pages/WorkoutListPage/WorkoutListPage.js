@@ -34,10 +34,9 @@ class WorkoutListPage extends Component {
         <Row center="xs" style={{paddingBottom: 40}}>
           <AddWorkout addWorkout={this.handleAddWorkout}/>
         </Row>
-
-        <Row>
+        <div>
           <WorkoutList handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts}/>
-        </Row>
+        </div>
       </div>
     );
   }

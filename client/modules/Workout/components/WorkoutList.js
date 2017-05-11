@@ -1,25 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import WorkoutListItem from "./WorkoutListItem/WorkoutListItem";
-import {Row} from "react-flexbox-grid";
+import {List} from "material-ui/List";
+import Subheader from 'material-ui/Subheader';
 
 function WorkoutList(props) {
   return (
-    <div>
+    <List>
+      <Subheader>Your workouts</Subheader>
       {props.workouts.map(workout => (
         <WorkoutListItem
           workout={workout}
           key={workout.cuid}
           onDelete={() => props.handleDeleteWorkout(workout.cuid)}
         />
-      ))
-      }
-    </div>
+      ))}
+    </List>
   );
 }
 
 WorkoutList.propTypes = {
-  workouts:         PropTypes.arrayOf(PropTypes.shape({
+  workouts:            PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     slug:  PropTypes.string.isRequired,
     cuid:  PropTypes.string.isRequired,
