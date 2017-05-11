@@ -46,6 +46,6 @@ export function deleteExercise(cuid) {
 
 export function deleteExerciseRequest(cuid) {
   return (dispatch) => {
-    return callApi(`workouts/exercises/${cuid}`, 'delete').then(() => dispatch(deleteExercise(cuid)));
+    return callApi(`workouts/exercise/${cuid}`, 'delete').then(() => dispatch(deleteExercise(cuid)));
   };
 }

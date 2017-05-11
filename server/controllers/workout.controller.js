@@ -122,5 +122,15 @@ export function getExercises(req, res) {
 
 
 export function deleteExercise(req, res) {
+  Exercise
+    .findOne({cuid: req.params.cuid})
+    .exec((err, exercise) => {
+      if (err) {
+        res.status(500).send(err);
+      }
 
+      exercise.remove(() => {
+        res.status(200).end();
+      });
+    });
 }

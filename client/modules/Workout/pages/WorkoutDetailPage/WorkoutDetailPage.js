@@ -66,7 +66,7 @@ class WorkoutDetailPage extends Component {
 
         <Divider />
 
-        <ExerciseList exercises={this.props.exercises} onDelete={this.handleDeleteExercise}/>
+        <ExerciseList exercises={this.props.exercises} handleDeleteWorkout={this.handleDeleteExercise}/>
 
       </div>
     );
