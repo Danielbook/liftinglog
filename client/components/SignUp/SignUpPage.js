@@ -10,7 +10,7 @@ class SignUpPage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    // set the initial component state
+    // set the initial components state
     this.state = {
       errors: {},
       user: {
@@ -48,7 +48,7 @@ class SignUpPage extends React.Component {
       if (xhr.status === 200) {
         // success
 
-        // change the component-container state
+        // change the components-container state
         this.setState({
           errors: {}
         });
@@ -88,7 +88,7 @@ class SignUpPage extends React.Component {
   }
 
   /**
-   * Render the component.
+   * Render the components.
    */
   render() {
     return (

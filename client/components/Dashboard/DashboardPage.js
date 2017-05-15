@@ -45,7 +45,7 @@ class DashboardPage extends React.Component {
   }
 
   /**
-   * Render the component.
+   * Render the components.
    */
   render() {
     return (<Dashboard  secretData={this.state.secretData}/>);

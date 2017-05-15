@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
-import {Row} from "react-flexbox-grid";
 
 export class AddExercise extends Component {
   constructor() {

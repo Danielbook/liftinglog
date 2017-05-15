@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import WorkoutList from "../../components/WorkoutList";
 import {addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts} from "../../WorkoutActions";
 import {getWorkouts} from "../../WorkoutReducer";
-import AddWorkout from "../../components/AddWorkout/AddWorkout";
+import AddWorkout from "../../components/AddWorkout";
 import {getUserID} from "../../../App/AppReducer";
 import {Row} from "react-flexbox-grid";
 
@@ -42,7 +42,7 @@ class WorkoutListPage extends Component {
   }
 }
 
-// Actions required to provide data for this component to render in sever side.
+// Actions required to provide data for this components to render in sever side.
 WorkoutListPage.need = [() => {
   return fetchWorkouts();
 }];

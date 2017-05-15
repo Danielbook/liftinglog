@@ -11,15 +11,16 @@ import {browserHistory} from "react-router";
 // Import Actions
 // Import Selectors
 import {getWorkout} from "../../WorkoutReducer";
-import AddExercise from "../../../../components/Exercise/AddExercise";
-import ExerciseList from "../../../../components/Exercise/ExerciseList";
+import AddExercise from "../../../Exercise/components/AddExercise";
+import ExerciseList from "../../../Exercise/components/ExerciseList";
 import {
   addExerciseRequest,
   deleteExerciseRequest,
   fetchExercises
-} from "../../../../components/Exercise/ExerciseActions";
+} from "../../../Exercise/ExerciseActions";
 import {fetchWorkout} from "../../WorkoutActions";
-import {getExercises} from "../../../../components/Exercise/ExerciseReducers";
+import {getExercises} from "../../../Exercise/ExerciseReducers";
+import {Row} from "react-flexbox-grid";
 
 class WorkoutDetailPage extends Component {
   constructor(props) {
@@ -48,12 +49,13 @@ class WorkoutDetailPage extends Component {
     return (
       <div>
         <Helmet title={this.props.workout.title}/>
+        <div>
         <RaisedButton
           onTouchTap={browserHistory.goBack}
           style={{marginTop: 20}}
           icon={<NavigationChevronLeft />}
         />
-
+        </div>
         <TextField
           value={this.props.workout.title}
           hintText=""
@@ -73,7 +75,7 @@ class WorkoutDetailPage extends Component {
   }
 }
 
-// Actions required to provide data for this component to render in sever side.
+// Actions required to provide data for this components to render in sever side.
 WorkoutDetailPage.need = [params => {
   return fetchWorkout(params.cuid);
 }];

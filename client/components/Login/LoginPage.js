@@ -19,7 +19,7 @@ class LoginPage extends React.Component {
       localStorage.removeItem('successMessage');
     }
 
-    // set the initial component state
+    // set the initial components state
     this.state = {
       errors: {},
       successMessage,
@@ -56,7 +56,7 @@ class LoginPage extends React.Component {
       if (xhr.status === 200) {
         // success
 
-        // change the component-container state
+        // change the components-container state
         this.setState({
           errors: {}
         });
@@ -69,7 +69,7 @@ class LoginPage extends React.Component {
       } else {
         // failure
 
-        // change the component state
+        // change the components state
         const errors = xhr.response.errors ? xhr.response.errors : {};
         errors.summary = xhr.response.message;
 
@@ -97,7 +97,7 @@ class LoginPage extends React.Component {
   }
 
   /**
-   * Render the component.
+   * Render the components.
    */
   render() {
     return (

@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 
 const Set = () => (
-  <div style={{flex: 1, flexDirection: 'row'}}>
+  <div>
     <TextField
       floatingLabelText="Weight"
     />

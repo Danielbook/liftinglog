@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from "prop-types";
-import Exercise from './Exercise'
+import ExerciseListItem from './ExerciseListItem'
+import {List} from "material-ui/List";
 
 const ExerciseList = (props) => (
-
-  <div>
+  <List>
     {props.exercises.map(exercise =>
-      <Exercise
+      <ExerciseListItem
         key={exercise._id}
         exercise={exercise}
         onDelete={() => props.handleDeleteWorkout(exercise.cuid)}
       />
     )}
-  </div>
+  </List>
 );
 
 ExerciseList.propTypes = {

@@ -5,17 +5,14 @@ import React from 'react'
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Set from "./Set";
-
-
-const SetList = ({ sets }) => (
+const SetList = (props) => (
   <div>
-    {sets.map(set =>
+    {props.sets.map(set =>
       <Set
-        key={sets.numberOfSets}
+        key={props.sets._id}
       />
     )}
   </div>
 );
-
 
 export default SetList;

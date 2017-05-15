@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import WorkoutListItem from "./WorkoutListItem/WorkoutListItem";
+import WorkoutListItem from "./WorkoutListItem";
 import {List} from "material-ui/List";
 import Subheader from 'material-ui/Subheader';
 
