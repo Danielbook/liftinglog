@@ -1,5 +1,6 @@
 import Workout from "../models/workout";
 import Exercise from "../models/exercise";
+import Set from "../models/set";
 import cuid from "cuid";
 import slug from "limax";
 import sanitizeHtml from "sanitize-html";
@@ -120,7 +121,6 @@ export function getExercises(req, res) {
     });
 }
 
-
 export function deleteExercise(req, res) {
   Exercise
     .findOne({cuid: req.params.cuid})
@@ -128,9 +128,60 @@ export function deleteExercise(req, res) {
       if (err) {
         res.status(500).send(err);
       }
-
       exercise.remove(() => {
         res.status(200).end();
       });
+    });
+}
+
+export function addSet(req, res) {
+  if (!req.body.set.exerciseCUID) {
+    res.status(403).end();
+  }
+
+  const newSet = new Set();
+  newSet.exerciseCUID = req.body.set.exerciseCUID;
+  newSet.cuid = cuid();
+
+  newSet.save((err, saved) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+
+    Exercise
+      .findOneAndUpdate(
+        {cuid: req.body.set.exerciseCUID},
+        {$push: {sets: newSet._id}},
+        {upsert: true, new: true},
+        function (err, data) {
+          if (err) console.log(err);
+        });
+
+    res.json({set: saved});
+  });
+}
+
+export function deleteSet(req, res) {
+  Set
+    .findOne({cuid: req.params.cuid})
+    .exec((err, set) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      set.remove(() => {
+        res.status(200).end();
+      });
+    });
+}
+
+export function getSets(req, res) {
+  Exercise
+    .findOne({cuid: req.params.cuid})
+    .populate('sets')
+    .exec((err, exercise) => {
+      if (err) res.status(500).send(err);
+      const sets = exercise.sets;
+      res.json({sets});
     });
 }

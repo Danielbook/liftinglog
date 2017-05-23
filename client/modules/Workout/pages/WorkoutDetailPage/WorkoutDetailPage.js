@@ -8,8 +8,6 @@ import Divider from "material-ui/Divider";
 import RaisedButton from "material-ui/RaisedButton";
 import NavigationChevronLeft from "material-ui/svg-icons/navigation/chevron-left";
 import {browserHistory} from "react-router";
-// Import Actions
-// Import Selectors
 import {getWorkout} from "../../WorkoutReducer";
 import AddExercise from "../../../Exercise/components/AddExercise";
 import ExerciseList from "../../../Exercise/components/ExerciseList";
@@ -21,15 +19,9 @@ import {
 import {fetchWorkout} from "../../WorkoutActions";
 import {getExercises} from "../../../Exercise/ExerciseReducers";
 import {Row} from "react-flexbox-grid";
+import {addSetRequest, deleteSetRequest} from "../../../Set/SetActions";
 
 class WorkoutDetailPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      exercises: []
-    }
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchExercises(this.props.workout.cuid));
   }
@@ -40,9 +32,19 @@ class WorkoutDetailPage extends Component {
     }
   };
 
+  handleDeleteSet = (set) => {
+    if (confirm('Do you want to delete this set')) { // eslint-disable-line
+      this.props.dispatch(deleteSetRequest(set));
+    }
+  };
+
   handleAddExercise = (title) => {
     let cuid = this.props.workout.cuid;
     this.props.dispatch(addExerciseRequest({title, cuid}));
+  };
+
+  handleAddSet = (cuid) => {
+    this.props.dispatch(addSetRequest({cuid}));
   };
 
   render() {
@@ -68,7 +70,10 @@ class WorkoutDetailPage extends Component {
 
         <Divider />
 
-        <ExerciseList exercises={this.props.exercises} handleDeleteWorkout={this.handleDeleteExercise}/>
+        <ExerciseList exercises={this.props.exercises}
+                      handleAddSet={this.handleAddSet}
+                      handleDeleteSet={this.handleDeleteSet}
+                      handleDeleteWorkout={this.handleDeleteExercise}/>
 
       </div>
     );

@@ -10,6 +10,8 @@ const ExerciseList = (props) => (
         key={exercise._id}
         exercise={exercise}
         onDelete={() => props.handleDeleteWorkout(exercise.cuid)}
+        onAddSet={() => props.handleAddSet(exercise.cuid)}
+        handleDeleteSet={props.handleDeleteSet}
       />
     )}
   </List>
@@ -23,6 +25,8 @@ ExerciseList.propTypes = {
     _id: PropTypes.string.isRequired,
   })).isRequired,
   handleDeleteWorkout: PropTypes.func.isRequired,
+  handleAddSet: PropTypes.func.isRequired,
+  handleDeleteSet: PropTypes.func.isRequired,
 };
 
 export default ExerciseList;

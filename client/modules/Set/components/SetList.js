@@ -1,18 +1,25 @@
 /**
  * Created by Daniel on 2017-04-11.
  */
-import React from 'react'
-import {connect} from "react-redux";
+import React from 'react';
 import PropTypes from "prop-types";
 import Set from "./Set";
+import {Row} from "react-flexbox-grid";
+
 const SetList = (props) => (
-  <div>
+  <Row>
     {props.sets.map(set =>
       <Set
-        key={props.sets._id}
+        key={set}
+        set={set}
+        onDelete={() => props.handleDeleteSet(set)}
       />
     )}
-  </div>
+  </Row>
 );
+
+SetList.propTypes = {
+  handleDeleteSet: PropTypes.func.isRequired,
+};
 
 export default SetList;
