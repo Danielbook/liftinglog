@@ -90,7 +90,11 @@ const User = require('mongoose').model('User');
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 const workoutsRoute = require('./routes/workout.routes');
+const exercisesRoute = require('./routes/exercise.routes');
+const setsRoute = require('./routes/set.routes');
 app.use('/api', workoutsRoute);
+app.use('/api', exercisesRoute);
+app.use('/api', setsRoute);
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 

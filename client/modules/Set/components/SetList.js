@@ -10,7 +10,7 @@ const SetList = (props) => (
   <Row>
     {props.sets.map(set =>
       <Set
-        key={set}
+        key={set.cuid}
         set={set}
         onDelete={() => props.handleDeleteSet(set)}
       />

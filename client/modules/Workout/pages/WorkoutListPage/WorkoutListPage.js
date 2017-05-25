@@ -10,11 +10,15 @@ import {Row} from "react-flexbox-grid";
 
 class WorkoutListPage extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchWorkouts());
+    this.updateFromDB();
   }
 
+  updateFromDB = () => {
+  this.props.dispatch(fetchWorkouts());
+  };
+
   handleDeleteWorkout = workout => {
-    if (confirm('Do you want to delete this post')) { // eslint-disable-line
+    if (confirm('Do you want to delete this post')) {
       this.props.dispatch(deleteWorkoutRequest(workout));
     }
   };
@@ -27,7 +31,7 @@ class WorkoutListPage extends Component {
   render() {
     return (
       <div>
-        <Row center="xs">
+        <Row center="xs" style={{paddingTop: 20}}>
           <h1>Workouts</h1>
         </Row>
 

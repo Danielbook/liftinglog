@@ -22,8 +22,7 @@ export function addSets(sets) {
 
 export function addSetRequest(set) {
   return (dispatch) => {
-    console.log(set);
-    return callApi('workouts/set', 'POST', {
+    return callApi('set', 'POST', {
       set: {
         exerciseCUID: set.cuid
       }
@@ -33,19 +32,21 @@ export function addSetRequest(set) {
 
 export function fetchSets(cuid) {
   return (dispatch) => {
-    return callApi(`workouts/set/${cuid}`).then(res => dispatch(addSets(res.sets)));
+    return callApi(`set/${cuid}`).then(res => dispatch(addSets(res.sets)));
   };
 }
 
-export function deleteSet(cuid) {
+export function deleteSet(id) {
   return {
     type: DELETE_SET,
-    cuid,
+    id,
   };
 }
 
-export function deleteSetRequest(cuid) {
+export function deleteSetRequest(id) {
   return (dispatch) => {
-    return callApi(`workouts/set/${cuid}`, 'delete').then(() => dispatch(deleteSet(cuid)));
+    return callApi(`set/${id}`, 'delete').then(() => {
+      return dispatch(deleteSet(id));
+    });
   };
 }

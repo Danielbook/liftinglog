@@ -3,7 +3,7 @@ import React from "react";
 import {IndexRoute, Route} from "react-router";
 import App from "./modules/App/App";
 import Stats from "./modules/Stats/Stats";
-import Home from "./components/Home/Home";
+import HomePage from "./components/Home/HomePage";
 import Settings from "./components/Settings/Settings";
 import LoginPage from "./components/Login/LoginPage";
 import SignUpPage from "./components/SignUp/SignUpPage";
@@ -47,7 +47,7 @@ export default (
         if (Auth.isUserAuthenticated()) {
           callback(null, require('./components/Dashboard/DashboardPage').default);
         } else {
-          callback(null, SignUpPage);
+          callback(null, HomePage);
         }
       }}
     />

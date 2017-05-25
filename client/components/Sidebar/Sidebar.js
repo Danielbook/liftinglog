@@ -13,12 +13,9 @@ import ActionHome from "material-ui/svg-icons/action/home";
 import ActionToday from "material-ui/svg-icons/action/today";
 import ActionTrendingup from "material-ui/svg-icons/action/trending-up";
 import ActionSettings from "material-ui/svg-icons/action/settings";
+import {toggleSidebar} from "../../modules/App/AppActions";
 
 class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Drawer
@@ -28,7 +25,6 @@ class Sidebar extends Component {
       >
         <List>
           <Subheader>{this.props.userName}</Subheader>
-
           {
             this.props.userName === '' ? null :
               <ListItem disabled={true}>
@@ -36,10 +32,10 @@ class Sidebar extends Component {
               </ListItem>
           }
 
-          <ListItem containerElement={<Link to="/"/>} primaryText="Home" leftIcon={<ActionHome />}/>
-          <ListItem containerElement={<Link to="/workouts"/>} primaryText="Workouts" leftIcon={<ActionToday />}/>
-          <ListItem containerElement={<Link to="/stats"/>} primaryText="Stats" leftIcon={<ActionTrendingup />}/>
-          <ListItem containerElement={<Link to="/settings"/>} primaryText="Settings" leftIcon={<ActionSettings />}/>
+          <ListItem onTouchTap={this.props.handleToggle} containerElement={<Link to="/"/>} primaryText="Home" leftIcon={<ActionHome />}/>
+          <ListItem onTouchTap={this.props.handleToggle} containerElement={<Link to="/workouts"/>} primaryText="Workouts" leftIcon={<ActionToday />}/>
+          <ListItem onTouchTap={this.props.handleToggle} containerElement={<Link to="/stats"/>} primaryText="Stats" leftIcon={<ActionTrendingup />}/>
+          <ListItem onTouchTap={this.props.handleToggle} containerElement={<Link to="/settings"/>} primaryText="Settings" leftIcon={<ActionSettings />}/>
         </List>
       </Drawer>
     );

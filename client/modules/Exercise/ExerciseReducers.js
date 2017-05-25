@@ -28,7 +28,7 @@ const ExerciseReducer = (state = initialState, action) => {
 /* Selectors */
 
 // Get all workouts
-export const getExercises = state => state.exercises.data;
+// export const getExercises = state => state.workouts.data;
 
 // export const getExercises = (state, cuid) => state.exercises.data.filter(workout => {
 //   if(workout.cuid === cuid) {

@@ -22,7 +22,7 @@ export function addExercises(exercises) {
 
 export function addExerciseRequest(exercise) {
   return (dispatch) => {
-    return callApi('workouts/exercise', 'POST', {
+    return callApi('exercise', 'POST', {
       exercise: {
         title: exercise.title,
         workoutCUID: exercise.cuid
@@ -33,7 +33,7 @@ export function addExerciseRequest(exercise) {
 
 export function fetchExercises(cuid) {
   return (dispatch) => {
-    return callApi(`workouts/exercise/${cuid}`).then(res => dispatch(addExercises(res.exercises)));
+    return callApi(`exercise/${cuid}`).then(res => dispatch(addExercises(res.exercises)));
   };
 }
 
@@ -46,6 +46,6 @@ export function deleteExercise(cuid) {
 
 export function deleteExerciseRequest(cuid) {
   return (dispatch) => {
-    return callApi(`workouts/exercise/${cuid}`, 'delete').then(() => dispatch(deleteExercise(cuid)));
+    return callApi(`exercise/${cuid}`, 'delete').then(() => dispatch(deleteExercise(cuid)));
   };
 }

@@ -17,7 +17,7 @@ const SetReducer = (state = initialState, action) => {
 
     case DELETE_SET :
       return {
-        data: state.data.filter(set => set.cuid !== action.cuid),
+        data: state.data.filter(set => set.id !== action.id),
       };
 
     default:

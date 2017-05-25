@@ -1,46 +1,38 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-// Import Components
 import Helmet from "react-helmet";
 import DevTools from "./components/DevTools";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {removeUser, toggleSidebar} from "./AppActions";
 import {getsidebarOpen} from "./AppReducer";
-// Material UI Components
 import "./components/tap_events";
 import AppBar from "material-ui/AppBar";
-import IconButton from "material-ui/IconButton";
-import IconMenu from "material-ui/IconMenu";
-import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
-// Material UI Icons
-import NavigationMoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-// Styles
 import styles from "./App.css";
 import classnames from "classnames/bind";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import {Link} from "react-router";
 import Auth from "../../components/Auth/Auth";
 import {Grid} from "react-flexbox-grid";
+import Logged from "./components/Logged";
 let cx = classnames.bind(styles);
-
-// import { switchLanguage } from '../../modules/Intl/IntlActions';
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    //this.handleTouchTap = this.handleTouchTap.bind(this);
     this.state = {
       isMounted: false,
-      userName:  ''
+      userName: ''
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleToggle() {
-    this.props.dispatch(toggleSidebar());
+    if (Auth.isUserAuthenticated()) {
+      this.props.dispatch(toggleSidebar());
+    }
   }
 
   componentDidMount() {
@@ -50,29 +42,14 @@ export class App extends Component {
   }
 
   render() {
-    let appBarStyle = cx({
-      appBar:   true,
+    const appBarStyle = cx({
+      appBar: true,
       expanded: this.props.sidebar
     });
-    let appContentStyle = cx({
+    const appContentStyle = cx({
       appContent: true,
-      expanded:   this.props.sidebar
+      expanded: this.props.sidebar
     });
-    const Logged = (props) => (
-      <IconMenu
-        {...props}
-        iconButtonElement={
-          <IconButton><NavigationMoreVertIcon/></IconButton>
-        }
-        targetOrigin={{horizontal: 'right', vertical: 'top'}}
-        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-      >
-        <MenuItem primaryText="Login" containerElement={<Link to="/login"/>}/>
-        <MenuItem primaryText="Sign up" containerElement={<Link to="/signup"/>}/>
-      </IconMenu>
-    );
-
-    Logged.muiName = 'IconMenu';
     return (
       <MuiThemeProvider
         muiTheme={getMuiTheme({userAgent: (typeof navigator !== 'undefined' && navigator.userAgent) || 'all'})}>
@@ -84,10 +61,10 @@ export class App extends Component {
               {charset: 'utf-8'},
               {
                 'http-equiv': 'X-UA-Compatible',
-                content:      'IE=edge',
+                content: 'IE=edge',
               },
               {
-                name:    'viewport',
+                name: 'viewport',
                 content: 'width=device-width, initial-scale=1',
               },
             ]}
@@ -100,7 +77,7 @@ export class App extends Component {
               <FlatButton label="Logout" containerElement={<Link to="/logout"/>}/> : <Logged />}
           />
 
-          <Sidebar />
+          <Sidebar handleToggle={this.handleToggle}/>
 
           <Grid
             fluid

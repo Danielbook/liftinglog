@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const setSchema = new Schema({
+export const SetSchema = new Schema({
   weight:       {type: 'Number', required: true, default: 0},
+  cuid:         {type: 'String', required: true},
   reps:         {type: 'Number', required: true, default: 0},
   rpe:          {type: 'Number', required: true, default: 0},
   exerciseCUID: {type: 'String', required: true},
 });
 
-export default mongoose.model('Set', setSchema);
+export const SetModel = mongoose.model('Set', SetSchema);

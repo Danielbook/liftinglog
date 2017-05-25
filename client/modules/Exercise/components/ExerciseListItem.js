@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import SetList from "../../Set/components/SetList";
 import IconButton from 'material-ui/IconButton';
 import ContentRemoveCircle from "material-ui/svg-icons/content/remove-circle-outline";
 import ContentAddCircle from "material-ui/svg-icons/content/add-circle-outline";
 import {Col, Row} from "react-flexbox-grid";
-import {getSets} from "../../Set/SetReducers";
+
 // https://github.com/callemall/material-ui/issues/3543 to stop selecting both row and item in LIST
 
 const ExerciseListItem = (props) => (
@@ -46,9 +45,4 @@ ExerciseListItem.propTypes = {
   handleDeleteSet: PropTypes.func.isRequired,
 };
 
-// Retrieve data from store as props
-const mapStateToProps = state => ({
-    sets:   getSets(state),
-});
-
-export default connect()(ExerciseListItem);
+export default ExerciseListItem;

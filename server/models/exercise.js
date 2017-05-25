@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
+import {SetSchema} from "./set";
 const Schema = mongoose.Schema;
-var Set = require('./set');
 
-const exerciseSchema = new Schema({
-  title:       {type: 'String', required: true},
-  cuid:        {type: 'String', required: true},
+export const ExerciseSchema = new Schema({
+  title: {type: 'String', required: true},
+  cuid: {type: 'String', required: true},
   workoutCUID: {type: 'String', required: true},
-  sets: [{type: Schema.Types.ObjectId, ref: 'Set'}],
+  sets: [SetSchema],
 });
 
-export default mongoose.model('Exercise', exerciseSchema);
+export const ExerciseModel = mongoose.model('Exercise', ExerciseSchema);

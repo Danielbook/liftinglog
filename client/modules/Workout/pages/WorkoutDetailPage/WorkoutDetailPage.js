@@ -14,17 +14,15 @@ import ExerciseList from "../../../Exercise/components/ExerciseList";
 import {
   addExerciseRequest,
   deleteExerciseRequest,
-  fetchExercises
 } from "../../../Exercise/ExerciseActions";
 import {fetchWorkout} from "../../WorkoutActions";
-import {getExercises} from "../../../Exercise/ExerciseReducers";
-import {Row} from "react-flexbox-grid";
 import {addSetRequest, deleteSetRequest} from "../../../Set/SetActions";
 
 class WorkoutDetailPage extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchExercises(this.props.workout.cuid));
-  }
+  handleAddExercise = (title) => {
+    let cuid = this.props.workout.cuid;
+    this.props.dispatch(addExerciseRequest({title, cuid}));
+  };
 
   handleDeleteExercise = (exercise) => {
     if (confirm('Do you want to delete this exercise')) { // eslint-disable-line
@@ -32,19 +30,15 @@ class WorkoutDetailPage extends Component {
     }
   };
 
+  handleAddSet = (cuid) => {
+    this.props.dispatch(addSetRequest({cuid}));
+  };
+
   handleDeleteSet = (set) => {
+    console.log("Function: " + set);
     if (confirm('Do you want to delete this set')) { // eslint-disable-line
       this.props.dispatch(deleteSetRequest(set));
     }
-  };
-
-  handleAddExercise = (title) => {
-    let cuid = this.props.workout.cuid;
-    this.props.dispatch(addExerciseRequest({title, cuid}));
-  };
-
-  handleAddSet = (cuid) => {
-    this.props.dispatch(addSetRequest({cuid}));
   };
 
   render() {
@@ -52,11 +46,11 @@ class WorkoutDetailPage extends Component {
       <div>
         <Helmet title={this.props.workout.title}/>
         <div>
-        <RaisedButton
-          onTouchTap={browserHistory.goBack}
-          style={{marginTop: 20}}
-          icon={<NavigationChevronLeft />}
-        />
+          <RaisedButton
+            onTouchTap={browserHistory.goBack}
+            style={{marginTop: 20}}
+            icon={<NavigationChevronLeft />}
+          />
         </div>
         <TextField
           value={this.props.workout.title}
@@ -65,12 +59,11 @@ class WorkoutDetailPage extends Component {
 
         <DatePicker hintText="Date of workout" container="inline" mode="landscape"/>
 
-
         <AddExercise addExercise={this.handleAddExercise}/>
 
         <Divider />
 
-        <ExerciseList exercises={this.props.exercises}
+        <ExerciseList exercises={this.props.workout.exercises}
                       handleAddSet={this.handleAddSet}
                       handleDeleteSet={this.handleDeleteSet}
                       handleDeleteWorkout={this.handleDeleteExercise}/>
@@ -89,15 +82,15 @@ WorkoutDetailPage.need = [params => {
 function mapStateToProps(state, props) {
   return {
     workout: getWorkout(state, props.params.cuid),
-    exercises: getExercises(state)
   };
 }
 
 WorkoutDetailPage.propTypes = {
-  workout:  PropTypes.shape({
+  workout: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    slug:  PropTypes.string.isRequired,
-    cuid:  PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
+    exercises: PropTypes.array.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };

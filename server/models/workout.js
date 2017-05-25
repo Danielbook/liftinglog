@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-var Exercise = require('./exercise');
+import {ExerciseSchema} from './exercise';
 
-const workoutSchema = new Schema({
+export const WorkoutSchema = new Schema({
   title:     {type: 'String', required: true},
   cuid:      {type: 'String', required: true},
   slug:      {type: 'String', required: true},
   userID:    {type: 'String', required: true},
-  exercises: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }],
+  exercises: [ExerciseSchema],
   date:      {type: 'Date', default: Date.now, required: true},
 });
 
-export default mongoose.model('Workout', workoutSchema);
+export const WorkoutModel = mongoose.model('Workout', WorkoutSchema);
