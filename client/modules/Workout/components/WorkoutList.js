@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import WorkoutListItem from "./WorkoutListItem";
 import {List} from "material-ui/List";
-import Subheader from 'material-ui/Subheader';
+import Subheader from "material-ui/Subheader";
 
 function WorkoutList(props) {
   return (
@@ -20,10 +20,10 @@ function WorkoutList(props) {
 }
 
 WorkoutList.propTypes = {
-  workouts:            PropTypes.arrayOf(PropTypes.shape({
+  workouts: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    slug:  PropTypes.string.isRequired,
-    cuid:  PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    cuid: PropTypes.string.isRequired,
   })).isRequired,
   handleDeleteWorkout: PropTypes.func.isRequired,
 };

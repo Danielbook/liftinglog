@@ -4,18 +4,17 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import Set from "./Set";
-import {Row} from "react-flexbox-grid";
 
 const SetList = (props) => (
-  <Row>
+  <div>
     {props.sets.map(set =>
       <Set
         key={set.cuid}
-        set={set}
+        {...set}
         onDelete={() => props.handleDeleteSet(set)}
       />
     )}
-  </Row>
+  </div>
 );
 
 SetList.propTypes = {

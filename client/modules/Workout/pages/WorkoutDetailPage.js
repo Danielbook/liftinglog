@@ -8,15 +8,15 @@ import Divider from "material-ui/Divider";
 import RaisedButton from "material-ui/RaisedButton";
 import NavigationChevronLeft from "material-ui/svg-icons/navigation/chevron-left";
 import {browserHistory} from "react-router";
-import {getWorkout} from "../../WorkoutReducer";
-import AddExercise from "../../../Exercise/components/AddExercise";
-import ExerciseList from "../../../Exercise/components/ExerciseList";
+import {getWorkout} from "../WorkoutReducer";
+import AddExercise from "../../Exercise/components/AddExercise";
+import ExerciseList from "../../Exercise/components/ExerciseList";
 import {
   addExerciseRequest,
   deleteExerciseRequest,
-} from "../../../Exercise/ExerciseActions";
-import {fetchWorkout} from "../../WorkoutActions";
-import {addSetRequest, deleteSetRequest} from "../../../Set/SetActions";
+} from "../../Exercise/ExerciseActions";
+import {fetchWorkout} from "../WorkoutActions";
+import {addSetRequest, deleteSetRequest} from "../../Set/SetActions";
 
 class WorkoutDetailPage extends Component {
   handleAddExercise = (title) => {

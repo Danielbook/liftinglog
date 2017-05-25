@@ -9,7 +9,7 @@ import {Col, Row} from "react-flexbox-grid";
 // https://github.com/callemall/material-ui/issues/3543 to stop selecting both row and item in LIST
 
 const ExerciseListItem = (props) => (
-  <Row middle="xs" style={{marginBottom: 40}}>
+  <Row style={{marginBottom: 40}}>
     <Col xs={10}>
       <h3>{props.exercise.title}</h3>
     </Col>

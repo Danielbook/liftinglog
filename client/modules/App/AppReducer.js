@@ -47,7 +47,7 @@ const AppReducer = (state = initialState, action) => {
 /* Selectors */
 export const getUserName = state => state.app.user.userName;
 export const getUserID = state => state.app.user.userID;
-export const getsidebarOpen = state => state.app.sidebarOpen;
+export const getSidebarOpen = state => state.app.sidebarOpen;
 
 // Export Reducer
 export default AppReducer;

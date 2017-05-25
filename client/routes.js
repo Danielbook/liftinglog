@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React from "react";
 import {IndexRoute, Route} from "react-router";
 import App from "./modules/App/App";
@@ -9,7 +8,6 @@ import LoginPage from "./components/Login/LoginPage";
 import SignUpPage from "./components/SignUp/SignUpPage";
 import LogoutPage from "./components/Logout/Logout";
 import Auth from "./components/Auth/Auth";
-
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -26,8 +24,8 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   // require('./modules/Post/pages/PostListPage/PostListPage');
   // require('./modules/Post/pages/PostDetailPage/PostDetailPage');
-  require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage');
-  require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage');
+  require('./modules/Workout/pages/WorkoutListPage');
+  require('./modules/Workout/pages/WorkoutDetailPage');
 }
 
 function requireAuth(nextState, replace) {
@@ -52,21 +50,11 @@ export default (
       }}
     />
     <Route
-      path="/stats"
-      component={Stats}
-      onEnter={requireAuth}
-    />
-    <Route
-      path="/settings"
-      component={Settings}
-      onEnter={requireAuth}
-    />
-    <Route
       path="/workouts"
       onEnter={requireAuth}
       getComponent={(nextState, callback) => {
         require.ensure([], require => {
-          callback(null, require('./modules/Workout/pages/WorkoutListPage/WorkoutListPage').default);
+          callback(null, require('./modules/Workout/pages/WorkoutListPage').default);
         });
       }}
     />
@@ -75,9 +63,19 @@ export default (
       onEnter={requireAuth}
       getComponent={(nextState, callback) => {
         require.ensure([], require => {
-          callback(null, require('./modules/Workout/pages/WorkoutDetailPage/WorkoutDetailPage').default);
+          callback(null, require('./modules/Workout/pages/WorkoutDetailPage').default);
         });
       }}
+      />
+    <Route
+      path="/stats"
+      component={Stats}
+      onEnter={requireAuth}
+    />
+    <Route
+      path="/settings"
+      component={Settings}
+      onEnter={requireAuth}
     />
     <Route
       path="/login"
@@ -91,7 +89,6 @@ export default (
       path='/logout'
       component={LogoutPage}
     />
-
 
   </Route>
 );

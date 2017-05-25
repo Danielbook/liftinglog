@@ -6,7 +6,7 @@ import DevTools from "./components/DevTools";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import {removeUser, toggleSidebar} from "./AppActions";
-import {getsidebarOpen} from "./AppReducer";
+import {getSidebarOpen} from "./AppReducer";
 import "./components/tap_events";
 import AppBar from "material-ui/AppBar";
 import FlatButton from "material-ui/FlatButton";
@@ -98,7 +98,7 @@ App.propTypes = {
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
-    sidebar: getsidebarOpen(store),
+    sidebar: getSidebarOpen(store),
   };
 }
 

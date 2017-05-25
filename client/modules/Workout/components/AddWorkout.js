@@ -21,7 +21,7 @@ export class AddWorkout extends Component {
 
   render() {
     return (
-      <Row>
+      <Row middle="xs">
         <Col xs={9}>
           <TextField
             floatingLabelText="Workout Name"
@@ -33,6 +33,7 @@ export class AddWorkout extends Component {
             style={{marginLeft: 40}}
             type="submit"
             onTouchTap={this.addWorkout}
+            mini={true}
           >
             <ContentAdd />
           </FloatingActionButton>

@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import WorkoutList from "../../components/WorkoutList";
-import {addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts} from "../../WorkoutActions";
-import {getWorkouts} from "../../WorkoutReducer";
-import AddWorkout from "../../components/AddWorkout";
-import {getUserID} from "../../../App/AppReducer";
+import WorkoutList from "../components/WorkoutList";
+import {addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts} from "../WorkoutActions";
+import {getWorkouts} from "../WorkoutReducer";
+import AddWorkout from "../components/AddWorkout";
+import {getUserID} from "../../App/AppReducer";
 import {Row} from "react-flexbox-grid";
 
 class WorkoutListPage extends Component {
@@ -14,7 +14,7 @@ class WorkoutListPage extends Component {
   }
 
   updateFromDB = () => {
-  this.props.dispatch(fetchWorkouts());
+    this.props.dispatch(fetchWorkouts());
   };
 
   handleDeleteWorkout = workout => {
@@ -54,7 +54,7 @@ WorkoutListPage.need = [() => {
 // Retrieve data from store as props
 function mapStateToProps(state) {
   return {
-    userID:   getUserID(state),
+    userID: getUserID(state),
     workouts: getWorkouts(state),
   };
 }
