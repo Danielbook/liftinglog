@@ -24,12 +24,11 @@ export function addSet(req, res) {
         }
       }
     });
+
+  res.json({});
 }
 
 export function deleteSet(req, res) {
 
 }
 
-export function getSets(req, res) {
-
-}

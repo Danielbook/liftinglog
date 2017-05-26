@@ -23,28 +23,17 @@ export function addExercise(req, res) {
       function (err, data) {
         if (err) console.log(err);
       });
-}
-
-export function getExercises(req, res) {
-  WorkoutModel
-    .findOne({cuid: req.params.cuid})
-    .populate('exercises')
-    .exec((err, workout) => {
-      if (err) res.status(500).send(err);
-      const exercises = workout.exercises;
-      res.json({exercises});
-    });
+  res.json({});
 }
 
 export function deleteExercise(req, res) {
-  ExerciseModel
-    .findOne({cuid: req.params.cuid})
-    .exec((err, exercise) => {
-      if (err) {
-        res.status(500).send(err);
-      }
-      exercise.remove(() => {
-        res.status(200).end();
+  WorkoutModel
+    .findOneAndUpdate(
+      {cuid: req.body.exercise.workoutCUID},
+      {$pull: {exercises: {cuid: req.body.exercise.cuid}}},
+      {upsert: true, new: true},
+      function (err, data) {
+        if (err) console.log(err);
       });
-    });
+  res.json({});
 }

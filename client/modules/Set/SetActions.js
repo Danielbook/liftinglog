@@ -1,4 +1,5 @@
 import callApi from '../../util/apiCaller';
+import {fetchWorkouts} from "../Workout/WorkoutActions";
 
 // Export Constants
 export const ADD_SET = 'ADD_SET';
@@ -13,26 +14,13 @@ export function addSet(set) {
   };
 }
 
-export function addSets(sets) {
-  return {
-    type: ADD_SETS,
-    sets,
-  };
-}
-
 export function addSetRequest(set) {
   return (dispatch) => {
     return callApi('set', 'POST', {
       set: {
         exerciseCUID: set.cuid
       }
-    }).then(res => dispatch(addSet(res.set)));
-  };
-}
-
-export function fetchSets(cuid) {
-  return (dispatch) => {
-    return callApi(`set/${cuid}`).then(res => dispatch(addSets(res.sets)));
+    }).then(() => dispatch(fetchWorkouts()));
   };
 }
 

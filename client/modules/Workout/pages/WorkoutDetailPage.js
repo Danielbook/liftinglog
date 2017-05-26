@@ -67,7 +67,6 @@ class WorkoutDetailPage extends Component {
                       handleAddSet={this.handleAddSet}
                       handleDeleteSet={this.handleDeleteSet}
                       handleDeleteWorkout={this.handleDeleteExercise}/>
-
       </div>
     );
   }

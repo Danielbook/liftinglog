@@ -9,7 +9,7 @@ const ExerciseList = (props) => (
       <ExerciseListItem
         key={exercise._id}
         exercise={exercise}
-        onDelete={() => props.handleDeleteWorkout(exercise.cuid)}
+        onDelete={() => props.handleDeleteWorkout(exercise)}
         onAddSet={() => props.handleAddSet(exercise.cuid)}
         handleDeleteSet={props.handleDeleteSet}
       />

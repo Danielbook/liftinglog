@@ -39,7 +39,7 @@ class WorkoutListPage extends Component {
           <AddWorkout addWorkout={this.handleAddWorkout}/>
         </Row>
         <div>
-          <WorkoutList handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts}/>
+          <WorkoutList updateFromDB={this.updateFromDB} handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts}/>
         </div>
       </div>
     );
