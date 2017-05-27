@@ -24,17 +24,11 @@ export function addSetRequest(set) {
   };
 }
 
-export function deleteSet(id) {
-  return {
-    type: DELETE_SET,
-    id,
-  };
-}
-
-export function deleteSetRequest(id) {
+export function deleteSetRequest(set) {
+  console.log(set);
   return (dispatch) => {
-    return callApi(`set/${id}`, 'delete').then(() => {
-      return dispatch(deleteSet(id));
-    });
+    return callApi(`set`, 'delete', {
+      set: set
+    }).then(() => dispatch(fetchWorkouts()));
   };
 }

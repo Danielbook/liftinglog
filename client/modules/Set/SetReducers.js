@@ -25,10 +25,5 @@ const SetReducer = (state = initialState, action) => {
   }
 };
 
-/* Selectors */
-
-// Get all workouts
-export const getSets = state => state.sets.data;
-
 // Export Reducer
 export default SetReducer;

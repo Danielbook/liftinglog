@@ -7,6 +7,6 @@ const router = new express.Router();
 router.route('/set').post(SetController.addSet);
 
 // Delete a set
-router.route('/set/:id').delete(SetController.deleteSet);
+router.route('/set').delete(SetController.deleteSet);
 
 module.exports = router;
