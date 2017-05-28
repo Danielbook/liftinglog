@@ -28,7 +28,6 @@ function WorkoutListItem(props) {
 WorkoutListItem.propTypes = {
   workout: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
   }).isRequired,

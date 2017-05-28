@@ -11,14 +11,19 @@ import {browserHistory} from "react-router";
 import {getWorkout} from "../WorkoutReducer";
 import AddExercise from "../../Exercise/components/AddExercise";
 import ExerciseList from "../../Exercise/components/ExerciseList";
-import {
-  addExerciseRequest,
-  deleteExerciseRequest,
-} from "../../Exercise/ExerciseActions";
-import {fetchWorkout} from "../WorkoutActions";
+import {addExerciseRequest, deleteExerciseRequest} from "../../Exercise/ExerciseActions";
+import {fetchWorkout, updateWorkoutRequest} from "../WorkoutActions";
 import {addSetRequest, deleteSetRequest} from "../../Set/SetActions";
 
 class WorkoutDetailPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: props.title,
+      date: props.date
+    }
+  }
+
   handleAddExercise = (title) => {
     let cuid = this.props.workout.cuid;
     this.props.dispatch(addExerciseRequest({title, cuid}));
@@ -41,6 +46,26 @@ class WorkoutDetailPage extends Component {
     }
   };
 
+  updateTitle = (event, value) => {
+    this.setState({title: value});
+  };
+
+  onUpdateWorkoutTitle = () => {
+    const cuid = this.props.workout.cuid;
+
+    if (this.state.title !== this.props.workout.title) {
+      const newValue = this.state.title;
+      this.props.dispatch(updateWorkoutRequest({newValue, cuid}));
+    }
+  };
+
+  // TODO fix the changing of dates!
+  onUpdateWorkoutDate = (event, value) => {
+    // const cuid = this.props.workout.cuid;
+    // const newValue = new Date(value);
+    // this.props.dispatch(updateWorkoutRequest({newValue, cuid}));
+  };
+
   render() {
     return (
       <div>
@@ -53,11 +78,17 @@ class WorkoutDetailPage extends Component {
           />
         </div>
         <TextField
-          value={this.props.workout.title}
+          defaultValue={this.props.workout.title}
           hintText=""
-          floatingLabelText="Name of workout"/>
+          floatingLabelText="Name of workout"
+          onChange={this.updateTitle}
+          onBlur={this.onUpdateWorkoutTitle}/>
 
-        <DatePicker hintText="Date of workout" container="inline" mode="landscape"/>
+        <DatePicker
+          floatingLabelText="Date of workout"
+          container="inline"
+          mode="landscape"
+          onChange={this.onUpdateWorkoutDate}/>
 
         <AddExercise addExercise={this.handleAddExercise}/>
 
@@ -70,6 +101,8 @@ class WorkoutDetailPage extends Component {
       </div>
     );
   }
+
+
 }
 
 // Actions required to provide data for this components to render in sever side.
@@ -89,6 +122,7 @@ WorkoutDetailPage.propTypes = {
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     cuid: PropTypes.string.isRequired,
+    // date: PropTypes.instanceOf(Date),
     exercises: PropTypes.array.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,

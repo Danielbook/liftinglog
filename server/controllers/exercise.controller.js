@@ -23,7 +23,7 @@ export function addExercise(req, res) {
       function (err, data) {
         if (err) console.log(err);
       });
-  res.json({});
+  res.status(200).end()
 }
 
 export function deleteExercise(req, res) {
@@ -35,5 +35,5 @@ export function deleteExercise(req, res) {
       function (err, data) {
         if (err) console.log(err);
       });
-  res.json({});
+  res.status(200).end()
 }

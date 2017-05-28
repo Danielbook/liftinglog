@@ -39,6 +39,7 @@ export function addWorkout(req, res) {
   newWorkout.title = sanitizeHtml(newWorkout.title);
   newWorkout.slug = slug(newWorkout.title.toLowerCase(), {lowercase: true});
   newWorkout.cuid = cuid();
+  newWorkout.date = Date.now();
   newWorkout.userID = sanitizeHtml(newWorkout.userID);
 
   newWorkout.save((err, saved) => {
@@ -62,6 +63,37 @@ export function getWorkout(req, res) {
     }
     res.json({workout});
   });
+}
+
+export function updateWorkout(req, res) {
+  if (!req.body.newValue) {
+    res.status(403).end();
+  }
+
+  if( typeof (req.body.newValue) === 'string') {
+    WorkoutModel
+      .findOneAndUpdate(
+        {cuid: req.params.cuid},
+        {$set: {
+          title: req.body.newValue,
+          slug: slug(req.body.newValue.toLowerCase(), {lowercase: true})
+        }}
+      ).exec((err, workout) => {
+      if (err) res.status(500).send(err);
+      res.status(200).end();
+    });
+  } else if(typeof (req.body.newValue) === Date) {
+    WorkoutModel
+      .findOneAndUpdate(
+        {cuid: req.params.cuid},
+        {$set: {
+          date: req.body.newValue,
+        }}
+      ).exec((err, workout) => {
+      if (err) res.status(500).send(err);
+      res.status(200).end();
+    });
+  }
 }
 
 /**

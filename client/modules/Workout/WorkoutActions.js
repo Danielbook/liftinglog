@@ -43,6 +43,14 @@ export function fetchWorkout(cuid) {
   };
 }
 
+export function updateWorkoutRequest({newValue, cuid}) {
+  return (dispatch) => {
+    return callApi(`workouts/${cuid}`, 'POST', {
+      newValue: newValue
+    }).then(res => dispatch(fetchWorkouts()));
+  };
+}
+
 export function deleteWorkout(cuid) {
   return {
     type: DELETE_WORKOUT,

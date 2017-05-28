@@ -8,7 +8,7 @@ export const WorkoutSchema = new Schema({
   slug:      {type: 'String', required: true},
   userID:    {type: 'String', required: true},
   exercises: [ExerciseSchema],
-  date:      {type: 'Date', default: Date.now, required: true},
+  date:      {type: 'Date', required: true},
 });
 
 export const WorkoutModel = mongoose.model('Workout', WorkoutSchema);
