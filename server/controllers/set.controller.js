@@ -28,7 +28,29 @@ export function addSet(req, res) {
   res.status(200).end()
 }
 
-// TODO Remove the correct set, now the first set is removed
+export function updateSet(req, res) {
+  if (!req.body.set) {
+    res.status(403).end();
+  }
+
+  WorkoutModel
+    .findOne({'exercises.cuid': req.body.set.exerciseCUID})
+    .exec(function (err, workout) {
+      if (err) res.status(500).send(err);
+      for (let i = 0; i < workout.exercises.length; i++) {
+        for (let j = 0; j < workout.exercises[i].sets.length; j++) {
+          if (workout.exercises[i].sets[j].cuid === req.body.set.cuid) {
+            workout.exercises[i].sets[j] = req.body.set;
+            workout.save(function (err) {
+              if (err) res.status(500).send(err);
+            });
+            res.status(200).end()
+          }
+        }
+      }
+    });
+}
+
 export function deleteSet(req, res) {
   if (!req.body.set) {
     res.status(403).end();

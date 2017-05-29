@@ -14,6 +14,7 @@ import ExerciseList from "../../Exercise/components/ExerciseList";
 import {addExerciseRequest, deleteExerciseRequest} from "../../Exercise/ExerciseActions";
 import {fetchWorkout, updateWorkoutRequest} from "../WorkoutActions";
 import {addSetRequest, deleteSetRequest} from "../../Set/SetActions";
+import {Col, Row} from "react-flexbox-grid";
 
 class WorkoutDetailPage extends Component {
   constructor(props) {
@@ -69,26 +70,31 @@ class WorkoutDetailPage extends Component {
   render() {
     return (
       <div>
+      <Row middle="xs">
         <Helmet title={this.props.workout.title}/>
-        <div>
+        <Col xs={2}>
           <RaisedButton
             onTouchTap={browserHistory.goBack}
             style={{marginTop: 20}}
             icon={<NavigationChevronLeft />}
           />
-        </div>
+        </Col>
+        <Col xs>
         <TextField
           defaultValue={this.props.workout.title}
           hintText=""
           floatingLabelText="Name of workout"
           onChange={this.updateTitle}
           onBlur={this.onUpdateWorkoutTitle}/>
-
+        </Col>
+        <Col xs>
         <DatePicker
           floatingLabelText="Date of workout"
           container="inline"
           mode="landscape"
           onChange={this.onUpdateWorkoutDate}/>
+        </Col>
+      </Row>
 
         <AddExercise addExercise={this.handleAddExercise}/>
 

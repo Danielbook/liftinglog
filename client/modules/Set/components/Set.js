@@ -1,22 +1,40 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import TextField from "material-ui/TextField";
 import {Col, Row} from "react-flexbox-grid";
 import IconButton from "material-ui/IconButton";
 import ContentRemoveCircle from "material-ui/svg-icons/content/remove-circle-outline";
+import {updateSet} from "../SetActions";
 
 class Set extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        ...this.props,
+        weight: this.props.weight,
+        reps: this.props.reps,
+        rpe: this.props.rpe
+    };
+  }
+
+  onUpdateSet = () => {
+    const cuid = this.props.cuid;
+    const set = {...this.state};
+    this.props.dispatch(updateSet({set, cuid}));
+  };
 
   onChangeWeight = (event, value) => {
-    console.log(value);
+
+    this.setState({weight: parseFloat(value) });
   };
 
   onChangeReps = (event, value) => {
-    console.log(value);
+    this.setState({reps: parseFloat(value)});
   };
 
   onChangeRPE = (event, value) => {
-    console.log(value);
+    this.setState({rpe: parseFloat(value)});
   };
 
   render() {
@@ -26,6 +44,7 @@ class Set extends Component {
           <TextField
             defaultValue={this.props.weight}
             onChange={this.onChangeWeight}
+            onBlur={this.onUpdateSet}
             floatingLabelText="Weight"
           />
         </Col>
@@ -33,6 +52,7 @@ class Set extends Component {
           <TextField
             defaultValue={this.props.reps}
             onChange={this.onChangeReps}
+            onBlur={this.onUpdateSet}
             floatingLabelText="Reps"
           />
         </Col>
@@ -40,6 +60,7 @@ class Set extends Component {
           <TextField
             defaultValue={this.props.rpe}
             onChange={this.onChangeRPE}
+            onBlur={this.onUpdateSet}
             floatingLabelText="RPE"
           />
         </Col>
@@ -64,4 +85,4 @@ Set.propTypes = {
 };
 
 
-export default Set;
+export default connect()(Set);

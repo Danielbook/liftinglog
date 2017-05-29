@@ -1,4 +1,4 @@
-import callApi from '../../util/apiCaller';
+import callApi from "../../util/apiCaller";
 import {fetchWorkouts} from "../Workout/WorkoutActions";
 
 // Export Constants
@@ -22,6 +22,14 @@ export function addSetRequest(set) {
       }
     }).then(() => dispatch(fetchWorkouts()));
   };
+}
+
+export function updateSet({set, cuid}) {
+  return (dispatch) => {
+    return callApi(`set/${cuid}`, 'POST', {
+      set: set
+    }).then(() => dispatch(fetchWorkouts()));
+  }
 }
 
 export function deleteSetRequest(set) {
