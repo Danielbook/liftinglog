@@ -12,7 +12,10 @@ function WorkoutList(props) {
         <WorkoutListItem
           workout={workout}
           key={workout.cuid}
-          onDelete={() => props.handleDeleteWorkout(workout.cuid)}
+          onDelete={(event) => {
+            event.preventDefault();
+            props.handleDeleteWorkout(workout.cuid)
+          }}
         />
       ))}
     </List>

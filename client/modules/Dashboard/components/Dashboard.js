@@ -1,16 +1,17 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {getUser, setUser} from "../../App/AppActions";
+import {getUser, getMaxes} from "../../App/AppActions";
 import DashboardPage from "../pages/DashboardPage";
-import {getUserName} from "../../App/AppReducer";
+import {getUserName, getUserMaxes} from "../../App/AppReducer";
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.dispatch(getUser());
+    this.props.dispatch(getMaxes());
   }
 
   render() {
-    return (<DashboardPage userName={this.props.userName}/>);
+    return (<DashboardPage userName={this.props.userName} userMaxes={this.props.userMaxes}/>);
   }
 }
 
@@ -18,6 +19,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     userName: getUserName(state),
+    userMaxes: getUserMaxes(state),
   };
 }
 

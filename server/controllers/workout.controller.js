@@ -23,9 +23,9 @@ export function getWorkouts(req, res) {
 }
 
 export function getOneRepMaxes(req, res) {
-  var userSquats = 0;
-  var userBench = 0;
-  var userDeadlifts = 0;
+  let userSquats = 0;
+  let userBench = 0;
+  let userDeadlifts = 0;
 
   WorkoutModel
     .where('userID', req.session.currentUserID)
@@ -57,7 +57,12 @@ export function getOneRepMaxes(req, res) {
             }
           }
         }
-        res.json({userSquats, userBench, userDeadlifts});
+        // console.log(
+        //   "Squat: ", userSquats,
+        //   "Bench: ", userBench,
+        //   "Deadlifts: ", userDeadlifts,
+        // );
+        res.json({maxes: {userSquats, userBench, userDeadlifts}});
       }
     );
 }

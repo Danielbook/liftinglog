@@ -16,9 +16,9 @@ const DashboardPage = (props) => (
         subtitle="Your personal records"/>
       <CardText>
         <List>
-          <ListItem disabled={true}>Squat: {props.squat}</ListItem>
-          <ListItem disabled={true}>Bench press: {props.bench}</ListItem>
-          <ListItem disabled={true}>Deadlift: {props.deadlift}</ListItem>
+          <ListItem disabled={true}>Squat: {props.userMaxes.userSquats} kg</ListItem>
+          <ListItem disabled={true}>Bench press: {props.userMaxes.userBench} kg</ListItem>
+          <ListItem disabled={true}>Deadlift: {props.userMaxes.userDeadlifts} kg</ListItem>
         </List>
 
       </CardText>
@@ -28,6 +28,11 @@ const DashboardPage = (props) => (
 
 DashboardPage.propTypes = {
   userName: PropTypes.string.isRequired,
+  userMaxes: PropTypes.shape(({
+    userSquats: PropTypes.number.isRequired,
+    userBench: PropTypes.number.isRequired,
+    userDeadlifts: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 export default DashboardPage;

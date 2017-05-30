@@ -77,7 +77,7 @@ export class App extends Component {
               <FlatButton label="Logout" containerElement={<Link to="/logout"/>}/> : <Logged />}
           />
 
-          <Sidebar handleToggle={this.handleToggle}/>
+          {Auth.isUserAuthenticated() ? <Sidebar handleToggle={this.handleToggle}/> : null}
 
           <Grid
             fluid

@@ -6,6 +6,9 @@ const router = new express.Router();
 // Get all workouts
 router.route('/workouts').get(WorkoutController.getWorkouts);
 
+// Get users one rep max in the big three
+router.route('/workouts/onerepmax').get(WorkoutController.getOneRepMaxes);
+
 // Get one workout by cuid
 router.route('/workouts/:cuid').get(WorkoutController.getWorkout);
 
