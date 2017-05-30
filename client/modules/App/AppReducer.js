@@ -16,11 +16,7 @@ const AppReducer = (state = initialState, action) => {
     case SET_USER:
       return {
         ...state,
-        user: {
-          userID:    action.userID,
-          userName:  action.userName,
-          userEmail: action.userEmail
-        }
+        user: action.user
       };
 
     case TOGGLE_SIDEBAR:

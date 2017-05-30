@@ -1,15 +1,21 @@
+import callApi from '../../util/apiCaller';
+
 // Export Constants
 export const SET_USER = 'SET_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 
 // Export Actions
-export function setUser(userID, userName, userEmail) {
+export function setUser(user) {
   return {
     type: SET_USER,
-    userID,
-    userName,
-    userEmail
+    user
+  };
+}
+
+export function getUser() {
+  return (dispatch) => {
+    return callApi('dashboard').then(res => dispatch(setUser(res.user)));
   };
 }
 
