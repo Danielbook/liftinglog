@@ -9,6 +9,9 @@ router.route('/workouts').get(WorkoutController.getWorkouts);
 // Get users one rep max in the big three
 router.route('/workouts/onerepmax').get(WorkoutController.getOneRepMaxes);
 
+// Get users rep maxes 1-10
+router.route('/workouts/repmax').get(WorkoutController.getRepMaxes);
+
 // Get one workout by cuid
 router.route('/workouts/:cuid').get(WorkoutController.getWorkout);
 

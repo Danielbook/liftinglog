@@ -7,7 +7,7 @@ import {getWorkouts} from "../WorkoutReducer";
 import AddWorkout from "../components/AddWorkout";
 import {getUserID} from "../../App/AppReducer";
 import {Row} from "react-flexbox-grid";
-import {Card, CardTitle} from "material-ui/Card";
+import {Card} from "material-ui/Card";
 
 
 class WorkoutListPage extends Component {
@@ -42,8 +42,11 @@ class WorkoutListPage extends Component {
             <AddWorkout addWorkout={this.handleAddWorkout}/>
           </Row>
           <div>
-            <WorkoutList updateFromDB={this.updateFromDB} handleDeleteWorkout={this.handleDeleteWorkout}
-                         workouts={this.props.workouts}/>
+            <WorkoutList
+              updateFromDB={this.updateFromDB}
+              handleDeleteWorkout={this.handleDeleteWorkout}
+              workouts={this.props.workouts}
+            />
           </div>
         </Card>
       </div>

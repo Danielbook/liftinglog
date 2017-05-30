@@ -1,7 +1,7 @@
 import React from "react";
 import {IndexRoute, Route} from "react-router";
 import App from "./modules/App/App";
-import Stats from "./modules/Stats/Stats";
+import Stats from "./modules/Stats/pages/StatsPage";
 import HomePage from "./components/Home/HomePage";
 import Settings from "./components/Settings/Settings";
 import LoginPage from "./components/Login/LoginPage";
@@ -43,7 +43,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, require('./modules/Dashboard/components/Dashboard').default);
+          callback(null, require('./components/Dashboard/components/Dashboard').default);
         } else {
           callback(null, HomePage);
         }

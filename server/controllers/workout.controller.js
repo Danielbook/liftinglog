@@ -27,6 +27,7 @@ export function getOneRepMaxes(req, res) {
   let userBench = 0;
   let userDeadlifts = 0;
 
+
   WorkoutModel
     .where('userID', req.session.currentUserID)
     .find()
@@ -63,6 +64,51 @@ export function getOneRepMaxes(req, res) {
         //   "Deadlifts: ", userDeadlifts,
         // );
         res.json({maxes: {userSquats, userBench, userDeadlifts}});
+      }
+    );
+}
+
+
+export function getRepMaxes(req, res) {
+  let userSquats = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0);
+  let userBench = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0);
+  let userDeadlifts = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0);
+
+
+  WorkoutModel
+    .where('userID', req.session.currentUserID)
+    .find()
+    .exec((err, workouts) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        for (let n = 1; n <= 10; n++) {
+          for (let i = 0; i < workouts.length; i++) {
+            for (let j = 0; j < workouts[i].exercises.length; j++) {
+              if (workouts[i].exercises[j].title.toUpperCase() === 'SQUATS') {
+                for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                  if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userSquats[n-1]) {
+                    userSquats[n-1] = workouts[i].exercises[j].sets[k].weight;
+                  }
+                }
+              } else if (workouts[i].exercises[j].title.toUpperCase() === 'DEADLIFTS') {
+                for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                  if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userDeadlifts[n-1]) {
+                    userDeadlifts[n-1] = workouts[i].exercises[j].sets[k].weight;
+                  }
+                }
+              } else if (workouts[i].exercises[j].title.toUpperCase() === 'BENCH PRESS') {
+                for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                  if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userBench[n-1]) {
+                    userBench[n-1] = workouts[i].exercises[j].sets[k].weight;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        res.json({maxes: {userSquats: userSquats, userBench: userBench, userDeadlifts: userDeadlifts}});
       }
     );
 }

@@ -8,11 +8,6 @@ const initialState = {
     userName: '',
     userEmail: '',
   },
-  maxes: {
-    userSquats: 0,
-    userBench: 0,
-    userDeadlifts: 0,
-  },
   sidebarOpen: false,
 };
 
@@ -22,13 +17,6 @@ const AppReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.user
-      };
-    }
-
-    case SET_MAXES: {
-      return {
-        ...state,
-        maxes: action.maxes
       };
     }
 
@@ -46,11 +34,6 @@ const AppReducer = (state = initialState, action) => {
           userID: '',
           userName: '',
           userEmail: '',
-        },
-        maxes: {
-          userSquats: 0,
-          userBench: 0,
-          userDeadlifts: 0,
         }
       };
 
@@ -61,7 +44,6 @@ const AppReducer = (state = initialState, action) => {
 
 /* Selectors */
 export const getUserName = state => state.app.user.userName;
-export const getUserMaxes = state => state.app.maxes;
 export const getUserID = state => state.app.user.userID;
 export const getSidebarOpen = state => state.app.sidebarOpen;
 

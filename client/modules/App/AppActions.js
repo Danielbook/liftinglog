@@ -14,23 +14,9 @@ export function setUser(user) {
   };
 }
 
-// Export Actions
-export function setMaxes(maxes) {
-  return {
-    type: SET_MAXES,
-    maxes
-  };
-}
-
 export function getUser() {
   return (dispatch) => {
     return callApi('dashboard').then(res => dispatch(setUser(res.user)));
-  };
-}
-
-export function getMaxes() {
-  return (dispatch) => {
-    return callApi('workouts/onerepmax').then(res => dispatch(setMaxes(res.maxes)));
   };
 }
 

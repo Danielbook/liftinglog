@@ -20,7 +20,6 @@ export function updateSet({set}) {
 }
 
 export function deleteSetRequest(set) {
-  console.log(set);
   return (dispatch) => {
     return callApi(`set`, 'delete', {
       set: set
