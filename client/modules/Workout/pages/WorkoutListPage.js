@@ -7,6 +7,8 @@ import {getWorkouts} from "../WorkoutReducer";
 import AddWorkout from "../components/AddWorkout";
 import {getUserID} from "../../App/AppReducer";
 import {Row} from "react-flexbox-grid";
+import {Card, CardTitle} from "material-ui/Card";
+
 
 class WorkoutListPage extends Component {
   componentDidMount() {
@@ -31,16 +33,19 @@ class WorkoutListPage extends Component {
   render() {
     return (
       <div>
-        <Row center="xs" style={{paddingTop: 20}}>
+        <Row center="xs" style={{paddingTop: 20, paddingBottom: 20}}>
           <h1>Workouts</h1>
         </Row>
 
-        <Row center="xs" style={{paddingBottom: 40}}>
-          <AddWorkout addWorkout={this.handleAddWorkout}/>
-        </Row>
-        <div>
-          <WorkoutList updateFromDB={this.updateFromDB} handleDeleteWorkout={this.handleDeleteWorkout} workouts={this.props.workouts}/>
-        </div>
+        <Card className="container">
+          <Row center="xs" style={{paddingBottom: 40}}>
+            <AddWorkout addWorkout={this.handleAddWorkout}/>
+          </Row>
+          <div>
+            <WorkoutList updateFromDB={this.updateFromDB} handleDeleteWorkout={this.handleDeleteWorkout}
+                         workouts={this.props.workouts}/>
+          </div>
+        </Card>
       </div>
     );
   }

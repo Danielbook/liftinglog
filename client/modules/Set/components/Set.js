@@ -12,16 +12,12 @@ class Set extends Component {
     super(props);
     this.state = {
         ...this.props,
-        weight: this.props.weight,
-        reps: this.props.reps,
-        rpe: this.props.rpe
     };
   }
 
   onUpdateSet = () => {
-    const cuid = this.props.cuid;
     const set = {...this.state};
-    this.props.dispatch(updateSet({set, cuid}));
+    this.props.dispatch(updateSet({set}));
   };
 
   onChangeWeight = (event, value) => {

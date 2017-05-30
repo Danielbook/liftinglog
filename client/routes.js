@@ -43,7 +43,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, callback) => {
         if (Auth.isUserAuthenticated()) {
-          callback(null, require('./components/Dashboard/DashboardPage').default);
+          callback(null, require('./modules/Dashboard/components/Dashboard').default);
         } else {
           callback(null, HomePage);
         }

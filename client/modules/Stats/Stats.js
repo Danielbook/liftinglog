@@ -1,27 +1,33 @@
-import React from "react";
-import RaisedButton from "material-ui/RaisedButton";
-import {List, ListItem} from "material-ui/List";
+import React, {Component} from "react";
+import StatsPage from "./StatsPage";
 import {Card, CardTitle} from "material-ui/Card";
+import {Col, Row} from "react-flexbox-grid";
 
-const style = {
-  margin: 12,
-};
-
-class Stats extends React.Component {
+class Stats extends Component {
 
   render() {
     return (
-      <Card className="container">
-        <CardTitle
-          title="One rep maxes"
-        />
-        <List>
-          <ListItem disabled={true}>Squat</ListItem>
-          <ListItem disabled={true}>Bench press</ListItem>
-          <ListItem disabled={true}>Deadlift</ListItem>
-        </List>
-        <RaisedButton label="Set new 1RM maxes" primary={true} style={style}/>
-      </Card>
+      <div>
+        <Row center="xs" style={{paddingTop: 20, paddingBottom: 20}}>
+          <h1>Stats</h1>
+        </Row>
+        <Card className="container">
+          <CardTitle
+            title="Your current stats"
+          />
+          <Row>
+            <Col xs>
+              <StatsPage />
+            </Col>
+            <Col xs>
+              <StatsPage />
+            </Col>
+            <Col xs>
+              <StatsPage />
+            </Col>
+          </Row>
+        </Card>
+      </div>
     );
   }
 }

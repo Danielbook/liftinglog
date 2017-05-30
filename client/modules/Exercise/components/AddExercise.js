@@ -1,11 +1,9 @@
-/**
- * Created by Daniel on 2017-04-11.
- */
 import React, {Component} from "react";
 import PropTypes from "prop-types";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import TextField from "material-ui/TextField";
+import {Col, Row} from "react-flexbox-grid";
 
 export class AddExercise extends Component {
   constructor() {
@@ -23,15 +21,19 @@ export class AddExercise extends Component {
 
   render() {
     return (
-      <div>
-        <TextField
-          floatingLabelText="Exercise Name"
-          onChange={e => this.setState({title: e.target.value})}
-        />
-        <FloatingActionButton onTouchTap={this.addExercise} mini={true}>
-          <ContentAdd/>
-        </FloatingActionButton>
-      </div>
+      <Row middle="xs">
+        <Col xs={9}>
+          <TextField
+            floatingLabelText="Exercise"
+            onChange={e => this.setState({title: e.target.value})}
+          />
+        </Col>
+        <Col xs={3}>
+          <FloatingActionButton onTouchTap={this.addExercise} mini={true}>
+            <ContentAdd/>
+          </FloatingActionButton>
+        </Col>
+      </Row>
     );
   }
 }

@@ -4,7 +4,7 @@ import ExerciseListItem from './ExerciseListItem'
 import {List} from "material-ui/List";
 
 const ExerciseList = (props) => (
-  <List>
+  <List className="container">
     {props.exercises.map(exercise =>
       <ExerciseListItem
         key={exercise._id}

@@ -7,7 +7,7 @@ const router = new express.Router();
 router.route('/set').post(SetController.addSet);
 
 // Update a set
-router.route('/set/:cuid').post(SetController.updateSet);
+router.route('/set').put(SetController.updateSet);
 
 // Delete a set
 router.route('/set').delete(SetController.deleteSet);

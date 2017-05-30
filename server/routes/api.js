@@ -1,5 +1,4 @@
-import express from 'express';
-
+import express from "express";
 const router = new express.Router();
 
 router.get('/dashboard', (req, res) => {

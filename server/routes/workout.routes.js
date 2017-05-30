@@ -13,7 +13,7 @@ router.route('/workouts/:cuid').get(WorkoutController.getWorkout);
 router.route('/workouts').post(WorkoutController.addWorkout);
 
 // Update workout
-router.route('/workouts/:cuid').post(WorkoutController.updateWorkout);
+router.route('/workouts/:cuid').put(WorkoutController.updateWorkout);
 
 // Delete a workout by cuid
 router.route('/workouts/:cuid').delete(WorkoutController.deleteWorkout);

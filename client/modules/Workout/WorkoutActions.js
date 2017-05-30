@@ -45,7 +45,7 @@ export function fetchWorkout(cuid) {
 
 export function updateWorkoutRequest({newValue, cuid}) {
   return (dispatch) => {
-    return callApi(`workouts/${cuid}`, 'POST', {
+    return callApi(`workouts/${cuid}`, 'PUT', {
       newValue: newValue
     }).then(res => dispatch(fetchWorkouts()));
   };

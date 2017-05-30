@@ -183,6 +183,8 @@ app.use((req, res, next) => {
 app.listen(serverConfig.PORT, (error) => {
   if (!error) {
     console.log(`App is running!`); // eslint-disable-line
+  } else {
+    console.log(error);
   }
 });
 

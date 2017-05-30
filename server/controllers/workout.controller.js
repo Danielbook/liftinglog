@@ -22,6 +22,46 @@ export function getWorkouts(req, res) {
     });
 }
 
+export function getOneRepMaxes(req, res) {
+  var userSquats = 0;
+  var userBench = 0;
+  var userDeadlifts = 0;
+
+  WorkoutModel
+    .where('userID', req.session.currentUserID)
+    .find()
+    .exec((err, workouts) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        for (let i = 0; i < workouts.length; i++) {
+          for (let j = 0; j < workouts[i].exercises.length; j++) {
+            if (workouts[i].exercises[j].title.toUpperCase() === 'SQUATS') {
+              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userSquats) {
+                  userSquats = workouts[i].exercises[j].sets[k].weight;
+                }
+              }
+            } else if (workouts[i].exercises[j].title.toUpperCase() === 'DEADLIFTS') {
+              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userDeadlifts) {
+                  userDeadlifts = workouts[i].exercises[j].sets[k].weight;
+                }
+              }
+            } else if (workouts[i].exercises[j].title.toUpperCase() === 'BENCH PRESS') {
+              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userBench) {
+                  userBench = workouts[i].exercises[j].sets[k].weight;
+                }
+              }
+            }
+          }
+        }
+        res.json({userSquats, userBench, userDeadlifts});
+      }
+    );
+}
+
 /**
  * Save a workout
  * @param req
@@ -70,30 +110,19 @@ export function updateWorkout(req, res) {
     res.status(403).end();
   }
 
-  if( typeof (req.body.newValue) === 'string') {
-    WorkoutModel
-      .findOneAndUpdate(
-        {cuid: req.params.cuid},
-        {$set: {
+  WorkoutModel
+    .findOneAndUpdate(
+      {cuid: req.params.cuid},
+      {
+        $set: {
           title: req.body.newValue,
           slug: slug(req.body.newValue.toLowerCase(), {lowercase: true})
-        }}
-      ).exec((err, workout) => {
-      if (err) res.status(500).send(err);
-      res.status(200).end();
-    });
-  } else if(typeof (req.body.newValue) === Date) {
-    WorkoutModel
-      .findOneAndUpdate(
-        {cuid: req.params.cuid},
-        {$set: {
-          date: req.body.newValue,
-        }}
-      ).exec((err, workout) => {
-      if (err) res.status(500).send(err);
-      res.status(200).end();
-    });
-  }
+        }
+      }
+    ).exec((err, workout) => {
+    if (err) res.status(500).send(err);
+    res.status(200).end();
+  });
 }
 
 /**

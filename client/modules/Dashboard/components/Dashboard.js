@@ -1,28 +1,19 @@
-import React from "react";
+import React, {Component} from "react";
 import {connect} from "react-redux";
-import Auth from "../Auth/Auth";
-import Dashboard from "./Dashboard";
-import {setUser} from "../../modules/App/AppActions";
+import Auth from "../../../components/Auth/Auth";
+import {setUser} from "../../App/AppActions";
+import DashboardPage from "../pages/DashboardPage";
 
-class DashboardPage extends React.Component {
-
-  /**
-   * Class constructor.
-   */
+class Dashboard extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      secretData: '',
       userID:     '',
       userName:   '',
       userEmail:  ''
     };
   }
 
-  /**
-   * This method will be executed after initial rendering.
-   */
   componentDidMount() {
     const xhr = new XMLHttpRequest();
     xhr.open('get', '/api/dashboard');
@@ -43,12 +34,9 @@ class DashboardPage extends React.Component {
     xhr.send();
   }
 
-  /**
-   * Render the components.
-   */
   render() {
-    return (<Dashboard userName={this.state.userName}/>);
+    return (<DashboardPage userName={this.state.userName}/>);
   }
 }
 
-export default connect()(DashboardPage);
+export default connect()(Dashboard);

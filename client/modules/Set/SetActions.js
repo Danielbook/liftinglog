@@ -24,9 +24,9 @@ export function addSetRequest(set) {
   };
 }
 
-export function updateSet({set, cuid}) {
+export function updateSet({set}) {
   return (dispatch) => {
-    return callApi(`set/${cuid}`, 'POST', {
+    return callApi(`set`, 'PUT', {
       set: set
     }).then(() => dispatch(fetchWorkouts()));
   }

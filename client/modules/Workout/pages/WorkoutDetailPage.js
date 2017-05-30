@@ -52,9 +52,8 @@ class WorkoutDetailPage extends Component {
   };
 
   onUpdateWorkoutTitle = () => {
-    const cuid = this.props.workout.cuid;
-
     if (this.state.title !== this.props.workout.title) {
+      const cuid = this.props.workout.cuid;
       const newValue = this.state.title;
       this.props.dispatch(updateWorkoutRequest({newValue, cuid}));
     }
@@ -70,35 +69,36 @@ class WorkoutDetailPage extends Component {
   render() {
     return (
       <div>
-      <Row middle="xs">
         <Helmet title={this.props.workout.title}/>
-        <Col xs={2}>
+        <Row>
           <RaisedButton
             onTouchTap={browserHistory.goBack}
             style={{marginTop: 20}}
             icon={<NavigationChevronLeft />}
           />
-        </Col>
-        <Col xs>
-        <TextField
-          defaultValue={this.props.workout.title}
-          hintText=""
-          floatingLabelText="Name of workout"
-          onChange={this.updateTitle}
-          onBlur={this.onUpdateWorkoutTitle}/>
-        </Col>
-        <Col xs>
-        <DatePicker
-          floatingLabelText="Date of workout"
-          container="inline"
-          mode="landscape"
-          onChange={this.onUpdateWorkoutDate}/>
-        </Col>
-      </Row>
+        </Row>
+        <Row around="md">
+          <Col md={2}>
+            <TextField
+              defaultValue={this.props.workout.title}
+              hintText=""
+              floatingLabelText="Name of workout"
+              onChange={this.updateTitle}
+              onBlur={this.onUpdateWorkoutTitle}/>
+          </Col>
+          <Col md={2}>
+            <DatePicker
+              floatingLabelText="Date of workout"
+              container="inline"
+              mode="landscape"
+              onChange={this.onUpdateWorkoutDate}/>
+          </Col>
+          <Col md={2}>
+            <AddExercise addExercise={this.handleAddExercise}/>
+          </Col>
+        </Row>
 
-        <AddExercise addExercise={this.handleAddExercise}/>
-
-        <Divider />
+        <Divider style={{marginTop: 20, marginBottom: 20}}/>
 
         <ExerciseList exercises={this.props.workout.exercises}
                       handleAddSet={this.handleAddSet}
