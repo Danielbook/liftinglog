@@ -1,5 +1,5 @@
 const config = {
-  mongoURL: 'mongodb://localhost/lifting_log' || process.env.ATLAS_URL,
+  mongoURL: process.env.ATLAS_URL || 'mongodb://localhost/lifting_log',
   PORT: process.env.PORT || 8000,
   jwtSecret: "a secret phrase!!",
 };
