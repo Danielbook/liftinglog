@@ -12,15 +12,7 @@ require.extensions['.css'] = () => {
 module.exports = {
   devtool: 'hidden-source-map',
 
-  entry: {
-    app: [
-      './client/index.js',
-    ],
-    vendor: [
-      'react',
-      'react-dom',
-    ]
-  },
+  entry: ['babel-polyfill', __dirname + "/client/index.js"] ,
 
   output: {
     path: __dirname + '/dist/',
