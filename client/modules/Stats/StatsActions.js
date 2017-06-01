@@ -6,7 +6,7 @@ export const SET_MAXES = 'SET_USER_MAXES';
 export function setMaxes(maxes) {
   return {
     type: SET_MAXES,
-    maxes
+    maxes,
   };
 }
 

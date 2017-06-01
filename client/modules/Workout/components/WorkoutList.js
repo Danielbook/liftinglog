@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import WorkoutListItem from "./WorkoutListItem";
-import {List} from "material-ui/List";
-import Subheader from "material-ui/Subheader";
+import React from 'react';
+import PropTypes from 'prop-types';
+import WorkoutListItem from './WorkoutListItem';
+import { List } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
 
 function WorkoutList(props) {
   return (
@@ -14,7 +14,7 @@ function WorkoutList(props) {
           key={workout.cuid}
           onDelete={(event) => {
             event.preventDefault();
-            props.handleDeleteWorkout(workout.cuid)
+            props.handleDeleteWorkout(workout.cuid);
           }}
         />
       ))}

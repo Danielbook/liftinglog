@@ -1,5 +1,5 @@
 // Import Actions
-import {REMOVE_USER, SET_MAXES, SET_USER, TOGGLE_SIDEBAR} from "./AppActions";
+import { REMOVE_USER, SET_MAXES, SET_USER, TOGGLE_SIDEBAR } from './AppActions';
 
 // Initial State
 const initialState = {
@@ -16,7 +16,7 @@ const AppReducer = (state = initialState, action) => {
     case SET_USER: {
       return {
         ...state,
-        user: action.user
+        user: action.user,
       };
     }
 
@@ -34,7 +34,7 @@ const AppReducer = (state = initialState, action) => {
           userID: '',
           userName: '',
           userEmail: '',
-        }
+        },
       };
 
     default:

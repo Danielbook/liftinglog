@@ -4,15 +4,12 @@ import session from 'express-session';
 import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-let cookieParser = require('cookie-parser');
 import path from 'path';
-
 // Webpack Requirements
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-
 // React And Redux Setup
 import { configureStore } from '../client/store';
 import { Provider } from 'react-redux';
@@ -20,20 +17,20 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import Helmet from 'react-helmet';
-
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
+import serverConfig from './config';
 
 // Auth
 const passport = require('passport');
-import serverConfig from './config';
 
 mongoose.Promise = global.Promise;
 
 // connect to the database and load models
-let models = require('./models');
+const models = require('./models');
 models.connect(serverConfig.mongoURL);
+const User = require('mongoose').model('User');
 
 // Initialize the Express App
 const app = new Express();
@@ -45,17 +42,16 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-let sessionOpts = {
+const sessionOpts = {
   saveUninitialized: false,
   resave: false,
   secret: 'keyboard cat',
-  cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
+  cookie: { httpOnly: true, maxAge: 2419200000 }, // configure when sessions expires
 };
 
 // Apply body Parser and server public assets and routes
 app.use(compression());
 app.use(Express.static(path.resolve(__dirname, '../dist')));
-app.use(cookieParser(sessionOpts.secret));
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 app.use(session(sessionOpts));
@@ -69,13 +65,13 @@ passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
 // used to serialize the user for the session
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 // used to deserialize the user
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
     done(err, user);
   });
 });
@@ -83,8 +79,6 @@ passport.deserializeUser(function(id, done) {
 // pass the authenticaion checker middleware
 const authCheckMiddleware = require('./middleware/auth-check');
 app.use('/api', authCheckMiddleware);
-
-const User = require('mongoose').model('User');
 
 // routes
 const authRoutes = require('./routes/auth');
@@ -126,7 +120,7 @@ const renderFullPage = (html, initialState) => {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           ${process.env.NODE_ENV === 'production' ?
-          `//<![CDATA[
+    `//<![CDATA[
           window.webpackManifest = ${JSON.stringify(chunkManifest)};
           //]]>` : ''}
         </script>
@@ -165,7 +159,7 @@ app.use((req, res, next) => {
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
-              <RouterContext {...renderProps} />
+            <RouterContext {...renderProps} />
           </Provider>
         );
         const finalState = store.getState();

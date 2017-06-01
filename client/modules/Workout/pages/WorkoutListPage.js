@@ -1,13 +1,13 @@
-import React, {Component} from "react";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import WorkoutList from "../components/WorkoutList";
-import {addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts} from "../WorkoutActions";
-import {getWorkouts} from "../WorkoutReducer";
-import AddWorkout from "../components/AddWorkout";
-import {getUserID} from "../../App/AppReducer";
-import {Row} from "react-flexbox-grid";
-import {Card} from "material-ui/Card";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import WorkoutList from '../components/WorkoutList';
+import { addWorkoutRequest, deleteWorkoutRequest, fetchWorkouts } from '../WorkoutActions';
+import { getWorkouts } from '../WorkoutReducer';
+import AddWorkout from '../components/AddWorkout';
+import { getUserID } from '../../App/AppReducer';
+import { Row } from 'react-flexbox-grid';
+import { Card } from 'material-ui/Card';
 
 
 class WorkoutListPage extends Component {
@@ -27,19 +27,19 @@ class WorkoutListPage extends Component {
 
   handleAddWorkout = (title) => {
     let userID = this.props.userID;
-    this.props.dispatch(addWorkoutRequest({title, userID}));
+    this.props.dispatch(addWorkoutRequest({ title, userID }));
   };
 
   render() {
     return (
       <div>
-        <Row center="xs" style={{paddingTop: 20, paddingBottom: 20}}>
+        <Row center="xs" style={{ paddingTop: 20, paddingBottom: 20 }}>
           <h1>Workouts</h1>
         </Row>
 
         <Card className="container">
-          <Row center="xs" style={{paddingBottom: 40}}>
-            <AddWorkout addWorkout={this.handleAddWorkout}/>
+          <Row center="xs" style={{ paddingBottom: 40 }}>
+            <AddWorkout addWorkout={this.handleAddWorkout} />
           </Row>
           <div>
             <WorkoutList

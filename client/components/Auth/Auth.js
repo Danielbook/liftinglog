@@ -18,7 +18,7 @@ class Auth {
    * @returns {boolean}
    */
   static isUserAuthenticated() {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof(Storage) !== 'undefined') {
       return localStorage.getItem('token') !== null;
     } else { // Sorry! No Web Storage support..
       return false;

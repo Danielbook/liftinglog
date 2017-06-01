@@ -1,5 +1,5 @@
-import callApi from "../../util/apiCaller";
-import {fetchWorkouts} from "../Workout/WorkoutActions";
+import callApi from '../../util/apiCaller';
+import { fetchWorkouts } from '../Workout/WorkoutActions';
 
 // Export Actions
 export function addExerciseRequest(exercise) {
@@ -7,16 +7,16 @@ export function addExerciseRequest(exercise) {
     return callApi('exercise', 'POST', {
       exercise: {
         title: exercise.title,
-        workoutCUID: exercise.cuid
-      }
+        workoutCUID: exercise.cuid,
+      },
     }).then(() => dispatch(fetchWorkouts()));
   };
 }
 
 export function deleteExerciseRequest(exercise) {
   return (dispatch) => {
-    return callApi(`exercise`, 'delete', {
-      exercise: exercise
+    return callApi('exercise', 'delete', {
+      exercise,
     }).then(() => dispatch(fetchWorkouts()));
   };
 }

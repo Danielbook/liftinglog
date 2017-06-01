@@ -12,5 +12,5 @@ import maxes from './modules/Stats/StatsReducer';
 export default combineReducers({
   app,
   workouts,
-  maxes
+  maxes,
 });

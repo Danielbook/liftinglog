@@ -25,8 +25,8 @@ class LoginPage extends React.Component {
       successMessage,
       user: {
         email: '',
-        password: ''
-      }
+        password: '',
+      },
     };
 
     this.processForm = this.processForm.bind(this);
@@ -58,7 +58,7 @@ class LoginPage extends React.Component {
 
         // change the components-container state
         this.setState({
-          errors: {}
+          errors: {},
         });
 
         // save the token
@@ -74,7 +74,7 @@ class LoginPage extends React.Component {
         errors.summary = xhr.response.message;
 
         this.setState({
-          errors
+          errors,
         });
       }
     });
@@ -92,7 +92,7 @@ class LoginPage extends React.Component {
     user[field] = event.target.value;
 
     this.setState({
-      user
+      user,
     });
   }
 
@@ -114,7 +114,7 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object.isRequired,
 };
 
 export default LoginPage;

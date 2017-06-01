@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {Link} from "react-router";
-import {Card, CardText, CardTitle} from "material-ui/Card";
-import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
-import {Row} from "react-flexbox-grid";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import { Card, CardText, CardTitle } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import { Row } from 'react-flexbox-grid';
 
 
 const LoginForm = ({
@@ -12,11 +12,11 @@ const LoginForm = ({
                      onChange,
                      errors,
                      successMessage,
-                     user
+                     user,
                    }) => (
   <Card>
     <form action="/" onSubmit={onSubmit}>
-      <CardTitle title="Login"/>
+      <CardTitle title="Login" />
       <CardText>
 
         {successMessage && <p className="success-message">{successMessage}</p>}
@@ -44,7 +44,7 @@ const LoginForm = ({
         </Row>
 
         <Row>
-          <RaisedButton type="submit" label="Log in" primary/>
+          <RaisedButton type="submit" label="Log in" primary />
         </Row>
         <Row>
           <CardText>Don't have an account? <Link to={'/signup'}>Create one</Link>.</CardText>
@@ -55,11 +55,11 @@ const LoginForm = ({
 );
 
 LoginForm.propTypes = {
-  onSubmit:       PropTypes.func.isRequired,
-  onChange:       PropTypes.func.isRequired,
-  errors:         PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
   successMessage: PropTypes.string.isRequired,
-  user:           PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
 export default LoginForm;

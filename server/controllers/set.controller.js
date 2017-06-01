@@ -1,8 +1,8 @@
-import {WorkoutModel} from "../models/workout";
-import {SetModel} from "../models/set";
-import cuid from "cuid";
+import { WorkoutModel } from '../models/workout';
+import { SetModel } from '../models/set';
+import cuid from 'cuid';
 
-//TODO Do these in a more efficient way
+// TODO Do these in a more efficient way
 
 export function addSet(req, res) {
   if (!req.body.set.exerciseCUID) {
@@ -13,7 +13,7 @@ export function addSet(req, res) {
   newSet.cuid = cuid();
 
   WorkoutModel
-    .findOne({'exercises.cuid': req.body.set.exerciseCUID},)
+    .findOne({ 'exercises.cuid': req.body.set.exerciseCUID },)
     .exec(function (err, workout) {
       if (err) res.status(500).send(err);
       for (let i = 0; i < workout.exercises.length; i++) {
@@ -25,7 +25,7 @@ export function addSet(req, res) {
         }
       }
     });
-  res.status(200).end()
+  res.status(200).end();
 }
 
 export function updateSet(req, res) {
@@ -34,7 +34,7 @@ export function updateSet(req, res) {
   }
 
   WorkoutModel
-    .findOne({'exercises.cuid': req.body.set.exerciseCUID})
+    .findOne({ 'exercises.cuid': req.body.set.exerciseCUID })
     .exec(function (err, workout) {
       if (err) res.status(500).send(err);
       for (let i = 0; i < workout.exercises.length; i++) {
@@ -44,7 +44,7 @@ export function updateSet(req, res) {
             workout.save(function (err) {
               if (err) res.status(500).send(err);
             });
-            res.status(200).end()
+            res.status(200).end();
           }
         }
       }
@@ -57,7 +57,7 @@ export function deleteSet(req, res) {
   }
 
   WorkoutModel
-    .findOne({'exercises.cuid': req.body.set.exerciseCUID})
+    .findOne({ 'exercises.cuid': req.body.set.exerciseCUID })
     .exec(function (err, workout) {
       if (err) res.status(500).send(err);
       for (let i = 0; i < workout.exercises.length; i++) {
@@ -67,7 +67,7 @@ export function deleteSet(req, res) {
             workout.save(function (err) {
               if (err) res.status(500).send(err);
             });
-            res.status(200).end()
+            res.status(200).end();
           }
         }
       }

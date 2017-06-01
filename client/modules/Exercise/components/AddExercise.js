@@ -1,20 +1,20 @@
-import React, {Component} from "react";
-import PropTypes from "prop-types";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
-import TextField from "material-ui/TextField";
-import {Col, Row} from "react-flexbox-grid";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import TextField from 'material-ui/TextField';
+import { Col, Row } from 'react-flexbox-grid';
 
 export class AddExercise extends Component {
   constructor() {
     super();
     this.state = {
-      title: ""
-    }
+      title: '',
+    };
   }
 
   addExercise = () => {
-    if (this.state.title !== "") {
+    if (this.state.title !== '') {
       this.props.addExercise(this.state.title);
     }
   };
@@ -25,12 +25,12 @@ export class AddExercise extends Component {
         <Col xs={9}>
           <TextField
             floatingLabelText="Exercise"
-            onChange={e => this.setState({title: e.target.value})}
+            onChange={e => this.setState({ title: e.target.value })}
           />
         </Col>
         <Col xs={3}>
-          <FloatingActionButton onTouchTap={this.addExercise} mini={true}>
-            <ContentAdd/>
+          <FloatingActionButton onTouchTap={this.addExercise} mini>
+            <ContentAdd />
           </FloatingActionButton>
         </Col>
       </Row>

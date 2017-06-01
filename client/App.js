@@ -1,12 +1,12 @@
 /**
  * Root Component
  */
-import React from "react";
-import PropTypes from "prop-types";
-import {Provider} from "react-redux";
-import {browserHistory, Router} from "react-router";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
+import { browserHistory, Router } from 'react-router';
 // Import Routes
-import routes from "./routes";
+import routes from './routes';
 
 // Base stylesheet
 require('./main.css');

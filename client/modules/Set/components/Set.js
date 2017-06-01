@@ -1,36 +1,35 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import PropTypes from "prop-types";
-import TextField from "material-ui/TextField";
-import {Col, Row} from "react-flexbox-grid";
-import IconButton from "material-ui/IconButton";
-import ContentRemoveCircle from "material-ui/svg-icons/content/remove-circle-outline";
-import {updateSet} from "../SetActions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import TextField from 'material-ui/TextField';
+import { Col, Row } from 'react-flexbox-grid';
+import IconButton from 'material-ui/IconButton';
+import ContentRemoveCircle from 'material-ui/svg-icons/content/remove-circle-outline';
+import { updateSet } from '../SetActions';
 
 class Set extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        ...this.props,
+      ...this.props,
     };
   }
 
   onUpdateSet = () => {
-    const set = {...this.state};
-    this.props.dispatch(updateSet({set}));
+    const set = { ...this.state };
+    this.props.dispatch(updateSet({ set }));
   };
 
   onChangeWeight = (event, value) => {
-
-    this.setState({weight: parseFloat(value) });
+    this.setState({ weight: parseFloat(value) });
   };
 
   onChangeReps = (event, value) => {
-    this.setState({reps: parseFloat(value)});
+    this.setState({ reps: parseFloat(value) });
   };
 
   onChangeRPE = (event, value) => {
-    this.setState({rpe: parseFloat(value)});
+    this.setState({ rpe: parseFloat(value) });
   };
 
   render() {

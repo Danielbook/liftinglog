@@ -1,7 +1,7 @@
-import {WorkoutModel} from "../models/workout";
-import {ExerciseModel} from "../models/exercise";
-import cuid from "cuid";
-import sanitizeHtml from "sanitize-html";
+import { WorkoutModel } from '../models/workout';
+import { ExerciseModel } from '../models/exercise';
+import cuid from 'cuid';
+import sanitizeHtml from 'sanitize-html';
 
 export function addExercise(req, res) {
   if (!req.body.exercise.title) {
@@ -17,23 +17,23 @@ export function addExercise(req, res) {
 
   WorkoutModel
     .findOneAndUpdate(
-      {cuid: req.body.exercise.workoutCUID},
-      {$push: {exercises: newExercise}},
-      {upsert: true, new: true},
+      { cuid: req.body.exercise.workoutCUID },
+      { $push: { exercises: newExercise } },
+      { upsert: true, new: true },
       function (err, data) {
         if (err) console.log(err);
       });
-  res.status(200).end()
+  res.status(200).end();
 }
 
 export function deleteExercise(req, res) {
   WorkoutModel
     .findOneAndUpdate(
-      {cuid: req.body.exercise.workoutCUID},
-      {$pull: {exercises: {cuid: req.body.exercise.cuid}}},
-      {upsert: true, new: true},
+      { cuid: req.body.exercise.workoutCUID },
+      { $pull: { exercises: { cuid: req.body.exercise.cuid } } },
+      { upsert: true, new: true },
       function (err, data) {
         if (err) console.log(err);
       });
-  res.status(200).end()
+  res.status(200).end();
 }

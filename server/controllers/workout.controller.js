@@ -1,7 +1,7 @@
-import {WorkoutModel} from "../models/workout";
-import cuid from "cuid";
-import slug from "limax";
-import sanitizeHtml from "sanitize-html";
+import { WorkoutModel } from '../models/workout';
+import cuid from 'cuid';
+import slug from 'limax';
+import sanitizeHtml from 'sanitize-html';
 
 /**
  * Get all workout
@@ -18,7 +18,7 @@ export function getWorkouts(req, res) {
       if (err) {
         res.status(500).send(err);
       }
-      res.json({workouts});
+      res.json({ workouts });
     });
 }
 
@@ -32,84 +32,84 @@ export function getOneRepMaxes(req, res) {
     .where('userID', req.session.currentUserID)
     .find()
     .exec((err, workouts) => {
-        if (err) {
-          res.status(500).send(err);
-        }
-        for (let i = 0; i < workouts.length; i++) {
-          for (let j = 0; j < workouts[i].exercises.length; j++) {
-            if (workouts[i].exercises[j].title.toUpperCase() === 'SQUATS') {
-              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
-                if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userSquats) {
-                  userSquats = workouts[i].exercises[j].sets[k].weight;
-                }
+      if (err) {
+        res.status(500).send(err);
+      }
+      for (let i = 0; i < workouts.length; i++) {
+        for (let j = 0; j < workouts[i].exercises.length; j++) {
+          if (workouts[i].exercises[j].title.toUpperCase() === 'SQUATS') {
+            for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+              if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userSquats) {
+                userSquats = workouts[i].exercises[j].sets[k].weight;
               }
-            } else if (workouts[i].exercises[j].title.toUpperCase() === 'DEADLIFTS') {
-              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
-                if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userDeadlifts) {
-                  userDeadlifts = workouts[i].exercises[j].sets[k].weight;
-                }
+            }
+          } else if (workouts[i].exercises[j].title.toUpperCase() === 'DEADLIFTS') {
+            for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+              if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userDeadlifts) {
+                userDeadlifts = workouts[i].exercises[j].sets[k].weight;
               }
-            } else if (workouts[i].exercises[j].title.toUpperCase() === 'BENCH PRESS') {
-              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
-                if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userBench) {
-                  userBench = workouts[i].exercises[j].sets[k].weight;
-                }
+            }
+          } else if (workouts[i].exercises[j].title.toUpperCase() === 'BENCH PRESS') {
+            for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+              if (workouts[i].exercises[j].sets[k].reps === 1 && workouts[i].exercises[j].sets[k].weight > userBench) {
+                userBench = workouts[i].exercises[j].sets[k].weight;
               }
             }
           }
         }
+      }
         // console.log(
         //   "Squat: ", userSquats,
         //   "Bench: ", userBench,
         //   "Deadlifts: ", userDeadlifts,
         // );
-        res.json({maxes: {userSquats, userBench, userDeadlifts}});
-      }
+      res.json({ maxes: { userSquats, userBench, userDeadlifts } });
+    }
     );
 }
 
 
 export function getRepMaxes(req, res) {
-  let userSquats = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0);
-  let userBench = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0);
-  let userDeadlifts = Array.apply(null, Array(10)).map(Number.prototype.valueOf,0);
+  let userSquats = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0);
+  let userBench = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0);
+  let userDeadlifts = Array.apply(null, Array(10)).map(Number.prototype.valueOf, 0);
 
 
   WorkoutModel
     .where('userID', req.session.currentUserID)
     .find()
     .exec((err, workouts) => {
-        if (err) {
-          res.status(500).send(err);
-        }
-        for (let n = 1; n <= 10; n++) {
-          for (let i = 0; i < workouts.length; i++) {
-            for (let j = 0; j < workouts[i].exercises.length; j++) {
-              if (workouts[i].exercises[j].title.toUpperCase() === 'SQUATS') {
-                for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
-                  if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userSquats[n-1]) {
-                    userSquats[n-1] = workouts[i].exercises[j].sets[k].weight;
-                  }
+      if (err) {
+        res.status(500).send(err);
+      }
+      for (let n = 1; n <= 10; n++) {
+        for (let i = 0; i < workouts.length; i++) {
+          for (let j = 0; j < workouts[i].exercises.length; j++) {
+            if (workouts[i].exercises[j].title.toUpperCase() === 'SQUATS') {
+              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userSquats[n - 1]) {
+                  userSquats[n - 1] = workouts[i].exercises[j].sets[k].weight;
                 }
-              } else if (workouts[i].exercises[j].title.toUpperCase() === 'DEADLIFTS') {
-                for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
-                  if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userDeadlifts[n-1]) {
-                    userDeadlifts[n-1] = workouts[i].exercises[j].sets[k].weight;
-                  }
+              }
+            } else if (workouts[i].exercises[j].title.toUpperCase() === 'DEADLIFTS') {
+              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userDeadlifts[n - 1]) {
+                  userDeadlifts[n - 1] = workouts[i].exercises[j].sets[k].weight;
                 }
-              } else if (workouts[i].exercises[j].title.toUpperCase() === 'BENCH PRESS') {
-                for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
-                  if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userBench[n-1]) {
-                    userBench[n-1] = workouts[i].exercises[j].sets[k].weight;
-                  }
+              }
+            } else if (workouts[i].exercises[j].title.toUpperCase() === 'BENCH PRESS') {
+              for (let k = 0; k < workouts[i].exercises[j].sets.length; k++) {
+                if (workouts[i].exercises[j].sets[k].reps === n && workouts[i].exercises[j].sets[k].weight > userBench[n - 1]) {
+                  userBench[n - 1] = workouts[i].exercises[j].sets[k].weight;
                 }
               }
             }
           }
         }
-
-        res.json({maxes: {userSquats: userSquats, userBench: userBench, userDeadlifts: userDeadlifts}});
       }
+
+      res.json({ maxes: { userSquats, userBench, userDeadlifts } });
+    }
     );
 }
 
@@ -128,7 +128,7 @@ export function addWorkout(req, res) {
 
   // Let's sanitize inputs
   newWorkout.title = sanitizeHtml(newWorkout.title);
-  newWorkout.slug = slug(newWorkout.title.toLowerCase(), {lowercase: true});
+  newWorkout.slug = slug(newWorkout.title.toLowerCase(), { lowercase: true });
   newWorkout.cuid = cuid();
   newWorkout.date = Date.now();
   newWorkout.userID = sanitizeHtml(newWorkout.userID);
@@ -137,7 +137,7 @@ export function addWorkout(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({workout: saved});
+    res.json({ workout: saved });
   });
 }
 
@@ -148,11 +148,11 @@ export function addWorkout(req, res) {
  * @returns void
  */
 export function getWorkout(req, res) {
-  WorkoutModel.findOne({cuid: req.params.cuid}).exec((err, workout) => {
+  WorkoutModel.findOne({ cuid: req.params.cuid }).exec((err, workout) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.json({workout});
+    res.json({ workout });
   });
 }
 
@@ -163,17 +163,17 @@ export function updateWorkout(req, res) {
 
   WorkoutModel
     .findOneAndUpdate(
-      {cuid: req.params.cuid},
-      {
-        $set: {
-          title: req.body.newValue,
-          slug: slug(req.body.newValue.toLowerCase(), {lowercase: true})
-        }
-      }
+      { cuid: req.params.cuid },
+    {
+      $set: {
+        title: req.body.newValue,
+        slug: slug(req.body.newValue.toLowerCase(), { lowercase: true }),
+      },
+    }
     ).exec((err, workout) => {
-    if (err) res.status(500).send(err);
-    res.status(200).end();
-  });
+      if (err) res.status(500).send(err);
+      res.status(200).end();
+    });
 }
 
 /**
@@ -184,7 +184,7 @@ export function updateWorkout(req, res) {
  */
 export function deleteWorkout(req, res) {
   WorkoutModel
-    .findOne({cuid: req.params.cuid})
+    .findOne({ cuid: req.params.cuid })
     .exec((err, workout) => {
       if (err) {
         res.status(500).send(err);
@@ -195,5 +195,4 @@ export function deleteWorkout(req, res) {
       });
     });
 }
-
 

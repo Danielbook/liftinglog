@@ -1,13 +1,13 @@
-import React from "react";
-import {IndexRoute, Route} from "react-router";
-import App from "./modules/App/App";
-import Stats from "./modules/Stats/pages/StatsPage";
-import HomePage from "./components/Home/HomePage";
-import Settings from "./components/Settings/Settings";
-import LoginPage from "./components/Login/LoginPage";
-import SignUpPage from "./components/SignUp/SignUpPage";
-import LogoutPage from "./components/Logout/Logout";
-import Auth from "./components/Auth/Auth";
+import React from 'react';
+import { IndexRoute, Route } from 'react-router';
+import App from './modules/App/App';
+import Stats from './modules/Stats/pages/StatsPage';
+import HomePage from './components/Home/HomePage';
+import Settings from './components/Settings/Settings';
+import LoginPage from './components/Login/LoginPage';
+import SignUpPage from './components/SignUp/SignUpPage';
+import LogoutPage from './components/Logout/Logout';
+import Auth from './components/Auth/Auth';
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -31,8 +31,8 @@ if (process.env.NODE_ENV !== 'production') {
 function requireAuth(nextState, replace) {
   if (!Auth.isUserAuthenticated()) {
     replace({
-      pathname: '/'
-    })
+      pathname: '/',
+    });
   }
 }
 
@@ -66,7 +66,7 @@ export default (
           callback(null, require('./modules/Workout/pages/WorkoutDetailPage').default);
         });
       }}
-      />
+    />
     <Route
       path="/stats"
       component={Stats}
@@ -86,7 +86,7 @@ export default (
       component={SignUpPage}
     />
     <Route
-      path='/logout'
+      path="/logout"
       component={LogoutPage}
     />
 

@@ -1,4 +1,4 @@
-import {SET_MAXES} from "./StatsActions";
+import { SET_MAXES } from './StatsActions';
 
 // Initial State
 const initialState = {
@@ -14,7 +14,7 @@ const StatsReducer = (state = initialState, action) => {
         ...state,
         userSquats: action.maxes.userSquats,
         userBench: action.maxes.userBench,
-        userDeadlifts: action.maxes.userDeadlifts
+        userDeadlifts: action.maxes.userDeadlifts,
       };
     }
     default:

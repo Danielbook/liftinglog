@@ -3,7 +3,7 @@
  */
 const jwt = require('jsonwebtoken');
 const User = require('mongoose').model('User');
-import config from "../config";
+import config from '../config';
 
 
 /**
@@ -13,8 +13,6 @@ module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
-
-  // console.log(req.session);
 
   // get the last part from a authorization header string like "bearer token-value"
   const token = req.headers.authorization.split(' ')[1];

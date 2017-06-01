@@ -1,6 +1,3 @@
-/**
- * Created by Daniel on 2017-04-13.
- */
 const mongoose = require('mongoose');
 
 module.exports.connect = (uri) => {

@@ -3,7 +3,6 @@
  */
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 import DevTools from './modules/App/components/DevTools';
 import rootReducer from './reducers';
 
@@ -11,7 +10,6 @@ export function configureStore(initialState = {}) {
   // Middleware and store enhancers
   const enhancers = [
     applyMiddleware(
-      // logger, Use redux tool in browser instead
       thunk),
   ];
 

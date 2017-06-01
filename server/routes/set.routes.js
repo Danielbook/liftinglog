@@ -1,5 +1,5 @@
 const express = require('express');
-import * as SetController from "../controllers/set.controller";
+import * as SetController from '../controllers/set.controller';
 
 const router = new express.Router();
 

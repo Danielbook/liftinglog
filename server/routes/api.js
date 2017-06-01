@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 const router = new express.Router();
 
 router.get('/dashboard', (req, res) => {
@@ -7,7 +7,7 @@ router.get('/dashboard', (req, res) => {
       userID: req.session.currentUserID,
       userName: req.session.currentUserName,
       userEmail: req.session.currentUserEmail,
-    }
+    },
   });
 });
 

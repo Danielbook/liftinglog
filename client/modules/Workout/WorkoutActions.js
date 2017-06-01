@@ -18,7 +18,7 @@ export function addWorkoutRequest(workout) {
     return callApi('workouts', 'POST', {
       workout: {
         title: workout.title,
-        userID: workout.userID
+        userID: workout.userID,
       },
     }).then(res => dispatch(addWorkout(res.workout)));
   };
@@ -43,10 +43,10 @@ export function fetchWorkout(cuid) {
   };
 }
 
-export function updateWorkoutRequest({newValue, cuid}) {
+export function updateWorkoutRequest({ newValue, cuid }) {
   return (dispatch) => {
     return callApi(`workouts/${cuid}`, 'PUT', {
-      newValue: newValue
+      newValue,
     }).then(res => dispatch(fetchWorkouts()));
   };
 }
